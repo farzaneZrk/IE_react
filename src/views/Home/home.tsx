@@ -68,9 +68,6 @@ export default class Home extends Component<Props, State> {
         <p>{this.infos}</p>
         <p>Hello world!</p>
         <a href="/userProfile"> click me to go to profile!</a>
-        <footer>
-        <p>تمامی حقوق این سایت متعلق به جاب‌اونجا می‌باشد &copy;</p>
-        </footer>
       </div>
     );
   }

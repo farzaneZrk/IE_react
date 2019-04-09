@@ -4,13 +4,15 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Home from './views/Home/home';
-import Welcome from './views/Welcome/welcome';
+import Login from './views/Login/login';
 import UserProfile from './views/UserProfile/userProfile';
+import Register from './views/Register/register';
 
 ReactDOM.render(
     <Router>
       <div>
-        <Route exact path="/" component={Welcome} />
+        <Route exact path="/" component={Login} />
+        <Route path="/register" component={Register} />
         <Route path="/home" component={Home} />
         <Route path="/userProfile" component={UserProfile} />
       </div>

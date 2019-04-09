@@ -4,7 +4,7 @@ body {
   display: flex;
   flex-direction: column;
   margin: 0;
-  background: #f6f6f6;
+  background: whitesmoke;
 }
 
 @font-face {
@@ -18,10 +18,6 @@ font-family: "IRANSansWeb";
 #root{
   flex: 1 1 auto;
   background: whitesmoke;
-}
-
-.beforef{
-  color: red;
 }
 
 .myPage {
@@ -42,41 +38,4 @@ font-family: "IRANSansWeb";
     text-align: center;
     transition: 200ms;
   }
-}
-
-.navbar {
-    width: 100%;
-    background-color: white;
-    overflow: auto;
-    position: fixed;
-    top: 0%;
-    z-index: 5;
-}
-
-.navbar a {
-    float: left;
-    padding: 12px;
-    color: black;
-    text-decoration: none;
-    padding: 1% 2%;
-    font-size: 17px;
-}
-
-.navbar :nth-child(2){
-    margin-left: 10%;
-}
-
-.navbar a:hover {
-    background: rgba(167, 3, 3, 0.89);
-    color: white;
-    text-decoration: none;
-}
-
-.logoimg {
-    margin-right: 10%;
-    display: block;
-    float: right;
-    height: 100%;
-    width: 10%;
-    min-width: 10px;
 }
