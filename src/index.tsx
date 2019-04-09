@@ -7,6 +7,7 @@ import Home from './views/Home/home';
 import Login from './views/Login/login';
 import UserProfile from './views/UserProfile/userProfile';
 import Register from './views/Register/register';
+import 'bootstrap/dist/css/bootstrap.css';
 
 ReactDOM.render(
     <Router>
