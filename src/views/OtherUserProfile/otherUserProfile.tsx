@@ -23,7 +23,7 @@ export default class OtherUserProfile extends Component {
           <hr id="shortLine3" />
         </div>
 
-        <div className="profilenameAndPic">
+        <div className="UserInfo">
           <span dir="rtl" id="name">نام و نام خانوادگی</span><br />
           <span dir="rtl" id="userName">نام کاربری</span>
           <img src={require('./images/c.png')} alt="profile image" id="profileImage2" />

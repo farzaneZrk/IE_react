@@ -1,350 +1,238 @@
-// #shortLine2{
-//   position: absolute;
-//   /* top: 20px; */
-//   left: 58%;
-//   bottom: -21px;
-//   width: 15%;
-//   height: 20%;
-//   display: block;
-//   border-left: 20px solid transparent;
-//   border-top: none;
-//   border-right: none;
-//   border-bottom: 32px solid rgba(146, 193, 209, 0.74);
-//   background-color: rgba(255, 166, 0, 0);
-//   z-index: 2;
-// }
+.square {
+  position: relative;
+  width: 50%;
+}
 
-// #shortLine3{
-//   position: absolute;
-//   left: 56%;
-//   bottom: -21px;
-//   width: 14%;
-//   height: 20%;
-//   display: block;
-//   border-top: none;
-//   border-right: none;
-//   border-left: 20px solid transparent;
-//   border-bottom: 32px solid rgba(146, 193, 209, 0.74);
-//   background-color: rgba(255, 166, 0, 0);
-//   z-index: 2;
-// }
+.square:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
 
-// .wrapper>div{
-//   display:inline-block;
-//   text-align:left;
-//   vertical-align:top;
-//   border:2px solid red;
-//   font-size:16px;
-// }
-
-// .wrapper{
-//   text-align:center;
-//   border:2px solid blue;
-//   font-size:0;
-// }
-
-// #profileImage2 {
-//   border-radius: 25px;
-//   top: -45px;
-//   right: 0;
-//   position: absolute;
-//   border: 20px solid white;
-//   width: 52%;
-//   height: 105%;
-// }
-
-// #profileImage3 {
-//   border-radius: 25px;
-//   top: -31px;
-//   right: 3.5%;
-//   position: absolute;
-//   border: 0px solid white;
-//   width: 45%;
-//   height: 90%;
-//   z-index: 3;
-// }
-
-// .profilenameAndPic {
-//   padding: 5%;
-//   /* margin-bottom: 15px; */
-//   /* border: 1px solid lightcoral;
-//   background-color: lightcoral; */
-//   height: 70%;
-//   width: 30%;
-//   margin-top: -5%;
-//   margin-left: 55%;
-//   position: relative;
-// }
-
-// #name {
-//   margin-left: -53%;
-//   font-size: 2.5vw;
-// }
-
-// #userName {
-//   color: rgb(110, 110, 110);
-//   margin-left: 5%;
-//   font-size: 1.5vw;
-// }
-
-// #userDesc {
-//   padding-left: 15%;
-//   padding-right: 15%;
-//   margin-top: -1%;
-//   margin-bottom: 3vw;
-//   font-size: 140%;
-//   color: rgb(85, 83, 83);
-// }
-
-// .square {
-//   position: relative;
-//   width: 50%;
-// }
-
-// .square:after {
-//   content: "";
-//   display: block;
-//   padding-bottom: 100%;
-// }
-
-// .square-content {
-//   position: absolute;
-//   width: 100%;
-//   height: 100%;
-// }
+.square-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
 
 
-// .selector-button{
-// box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-// display: inline-flex;
-// background: white;
-// height: auto;
-// width:auto;
-// border: 7px solid white;
-// border-radius: 5px;
-// margin-right: 1.75%;
-// }
+.selector-button{
+box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+display: inline-flex;
+background: white;
+height: auto;
+width:auto;
+border: 7px solid white;
+border-radius: 5px;
+margin-right: 1.75%;
+}
 
-// .ifelsediv {
-// margin-left: 15%;
-// margin-right: 15%;
-// // margin-top: 3vw;
-// margin-bottom: 3vw;
-// height: auto;
-// width:auto;
-// border-radius: 15px;
-// font-size:160%;
-// color:black;  
-// }
+.add-skill-box {
+margin-left: 15%;
+margin-right: 15%;
+// margin-top: 3vw;
+margin-bottom: 3vw;
+height: auto;
+width:auto;
+border-radius: 15px;
+font-size:160%;
+color:black;  
+}
 
-// .add-skill-button {
-// box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-// background-color:  rgb(76, 133, 141);
+.add-skill-button {
+box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+background-color:  rgb(76, 133, 141);
 // border: none;
-// border-radius: 4px;
-// color: white;
-// height:auto;
-// width:auto;
-// text-align: center;
-// text-decoration: none;
-// display: inline-block;
-// font-size: 70%;
-// padding: 10px;
-// margin-right: 10px;
-// }
+border-radius: 4px;
+color: white;
+height:auto;
+width:auto;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 70%;
+padding: 10px;
+margin-right: 10px;
+}
 
-// .add-skill-button:hover{
-// background: yellow;
-// border: 2px solid rgb(76, 133, 141);
-// color:rgb(76, 133, 141);
-// text-decoration: none;
-// }
+.add-skill-button:hover{
+background: yellow;
+border: 2px solid rgb(76, 133, 141);
+color:rgb(76, 133, 141);
+text-decoration: none;
+}
 
-// #selcolor{
-// box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-// width: 18vw;
-// background-color: rgb(243, 241, 241);
-// border: 1px solid rgb(243, 241, 241);;
-// border-radius: 0;
-// font-size: 80%;
-// padding: 3px;
-// }
+#selcolor{
+box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+width: 18vw;
+background-color: rgb(243, 241, 241);
+border: 1px solid rgb(243, 241, 241);;
+border-radius: 0;
+font-size: 80%;
+padding: 3px;
+}
 
-// #default-option{
-// font-size: 5vw;
-// }
+#default-option{
+font-size: 5vw;
+}
 
-// .endorse-button {
-//   border: none;
-//   border-radius: 4px;
-//   color: white;
-//   height:30px;
-//   width:30px;
-//   text-align: center;
-//   text-decoration: none;
-//   display: inline-block;
-//   font-size: 100%;
-//   margin-left: 10px;
-// }
+.endorse-button {
+  border: none;
+  border-radius: 4px;
+  color: white;
+  height:30px;
+  width:30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 100%;
+  margin-left: 10px;
+}
 
-// .endorse-button:hover{
-//   background: rgba(167, 3, 3, 0.89);
-//   border: 2px solid yellow;
-//   color: yellow;
-//   text-decoration: none;
-// }
+.endorse-button:hover{
+  background: rgba(167, 3, 3, 0.89);
+  border: 2px solid yellow;
+  color: yellow;
+  text-decoration: none;
+}
 
-// .red-botton{
-//   background-color: rgb(228, 4, 4);
-// }
+.red-botton{
+  background-color: rgb(228, 4, 4);
+}
 
-// .red-botton:hover{
-//   background: yellow;
-//   border: 2px solid maroon;
-//   color: maroon;
-//   text-decoration: none;
-// }
+.red-botton:hover{
+  background: yellow;
+  border: 2px solid maroon;
+  color: maroon;
+  text-decoration: none;
+}
 
-// .blue-botton{
-//       background-color: rgb(156, 231, 241);
-//       color:  rgb(102, 170, 179);
-// }
+.blue-botton{
+  background-color: rgb(156, 231, 241);
+  color:  rgb(102, 170, 179);
+}
 
-// .skill-card-column {
-//   float: left;
-//   padding: 0 10px;
-//   display: inline;
-// }
+.skill-card-column {
+  float: left;
+  padding: 0 10px;
+  display: inline;
+}
 
-// .skill-card-row {
-//   margin: 0 -5px;
-//   margin-left: 15%;
-//   margin-right: 15%;
-//   margin-bottom: 10%;
-// }
+.skill-card-row {
+  margin: 0 -5px;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-bottom: 10%;
+}
 
-// .skill-card-row:after {
-//   content: "";		
-//   clear: both;
-// }
+.skill-card-row:after {
+  content: "";		
+  clear: both;
+}
 
-// .skill-card {
-//   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-//   padding: 5px;
-//   padding-top: 7px;
-//   padding-bottom: 0.5px;
-//   text-align: left;
-//   background-color:white;
-//   border-radius: 4px;
-//   font-size: 125%;
-//   margin-top:3%;
-// }
+.skill-card {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  padding-top: 7px;
+  padding-bottom: 0.5px;
+  text-align: left;
+  background-color:white;
+  border-radius: 4px;
+  font-size: 125%;
+  margin-top:3%;
+}
 
-// /* .skill-card :first-child{
-//   margin-left: 20%;
-// } */
+/* .skill-card :first-child{
+  margin-left: 20%;
+} */
 
-// .body-content{
-//   margin-left: 15%;
-//   margin-right: 15%;
-// }
+.body-content{
+  margin-left: 15%;
+  margin-right: 15%;
+}
 
-// .rowup{
-//     margin-top: 50px;
-//     margin-left: 100px;
-// }
+.rowup{
+    margin-top: 50px;
+    margin-left: 100px;
+}
 
-// .toplightbluelineup {
-//   margin-top: -2%;
-//   padding: 5%;
-//   margin-bottom: 15px;
-//   background-color: lightblue;
-//   position: relative;
-// }
+@media screen and (max-width: 780px) {
+  .logoimg {
+    height: 110%;
+    width: 15%;
+  }
 
-// .toplightbluelineup hr {
-//   display: block;
-//   background-color: lightblue;
-//   border: 1px solid lightblue;
-// }
+  #shortLine2{
+    left: 55%;
+    border-bottom: 28px solid rgba(146, 193, 209, 0.74);
+  }
 
-// @media screen and (max-width: 780px) {
-//   .logoimg {
-//     height: 110%;
-//     width: 15%;
-//   }
+  #shortLine3{
+    left: 53%;
+    border-bottom: 28px solid rgba(146, 193, 209, 0.74);
+  }
 
-//   #shortLine2{
-//     left: 55%;
-//     border-bottom: 28px solid rgba(146, 193, 209, 0.74);
-//   }
+  .toplightbluelineup {
+    margin-top: -3%;
+    padding: 6%;
+  }
 
-//   #shortLine3{
-//     left: 53%;
-//     border-bottom: 28px solid rgba(146, 193, 209, 0.74);
-//   }
+  #profileImage3 {
+    top: -36px;
+  }
 
-//   .toplightbluelineup {
-//     margin-top: -3%;
-//     padding: 6%;
-//   }
-
-//   #profileImage3 {
-//     top: -36px;
-//   }
-
-//   #selcolor{
-//     width: 30vw;
-//   }
+  #selcolor{
+    width: 30vw;
+  }
   
-//   #profileImage2 {
-//     width: 60%;
-//     height: 130%;
-//   }
+  #profileImage2 {
+    width: 60%;
+    height: 130%;
+  }
 
-//   #profileImage3 {
-//     top: -36px;
-//     width: 52%;
-//     height: 114%;
-//   }
+  #profileImage3 {
+    top: -36px;
+    width: 52%;
+    height: 114%;
+  }
   
-//   .profilenameAndPic {
-//     margin-bottom: 4%;
-//     height: 70%;
-//     width: 35%;
-//     margin-left: 51%;
-//   }
+  .UserInfo {
+    margin-bottom: 4%;
+    height: 70%;
+    width: 35%;
+    margin-left: 51%;
+  }
 
-//   #name {
-//     margin-left: -73%;
-//     font-size: 3.3vw;
-//   }
+  #name {
+    margin-left: -73%;
+    font-size: 3.3vw;
+  }
 
-//   #userName {
-//     margin-left: -15%;
-//     font-size: 2.3vw;
-//   }
+  #userName {
+    margin-left: -15%;
+    font-size: 2.3vw;
+  }
 
-//   #userDesc {
-//     margin-bottom: 3%;
-//     font-size: 120%;
-//   }
+  #userDesc {
+    margin-bottom: 3%;
+    font-size: 120%;
+  }
 
-//   .endorse-button {
-//     height:25px;
-//     width:25px;
-//     margin-top: 2px;    
-// }
+  .endorse-button {
+    height:25px;
+    width:25px;
+    margin-top: 2px;    
+}
 
-// .skill-card {
-//     padding-top: 5px;
-//     font-size: 95%;
-//     height: 5.5vw;
-// }
-// .skill-card-row {
-//   margin: 0 -5px;
-//   margin-left: 15%;
-//   margin-right: 15%;
-//   margin-top: 5%;
-// }
-// }
+.skill-card {
+    padding-top: 5px;
+    font-size: 95%;
+    height: 5.5vw;
+}
+.skill-card-row {
+  margin: 0 -5px;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 5%;
+}
+}
