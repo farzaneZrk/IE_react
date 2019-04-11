@@ -1,25 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+// minified version is also included
+import 'react-toastify/dist/ReactToastify.min.css';
 
 class App extends Component {
-  render() {
+  notify = () => toast.error("Wow so easy !");
+
+  func = () => {
+    this.notify()
+  }
+
+  render(){
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <button onClick={this.func}>Notify !</button>
+        <ToastContainer />
       </div>
     );
   }

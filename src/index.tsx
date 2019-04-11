@@ -6,8 +6,12 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Home from './views/Home/home';
 import Login from './views/Login/login';
 import UserProfile from './views/UserProfile/userProfile';
+import OtherUserProfile from './views/OtherUserProfile/otherUserProfile';
 import Register from './views/Register/register';
+import Project from './views/Project/project';
+import App from './App';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'react-notifications/lib/notifications.css';
 
 ReactDOM.render(
     <Router>
@@ -15,7 +19,10 @@ ReactDOM.render(
         <Route exact path="/" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/home" component={Home} />
-        <Route path="/userProfile" component={UserProfile} />
+        <Route path="/project" component={Project} />
+        <Route path="/profile" component={UserProfile} />
+        <Route path="/userProfile" component={OtherUserProfile} />
+        <Route path="/app" component={App} />
       </div>
     </Router>,
     document.getElementById('root')

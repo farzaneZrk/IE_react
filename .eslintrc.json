@@ -19,7 +19,7 @@
         "react"
     ],
     "rules": {
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", "ts", "tsx"] }],
         "import/no-unresolved": "off",
         "react/forbid-prop-types": "off"
     }
