@@ -13,17 +13,16 @@ class ProjectListBody extends Component <props, State>{
     render() {
         // var elementsDiv = "";
         var projects_and_users = {
-            marginTop: '-35px',
-            color:'red',
+            marginTop: '-35px !important',
         };
 
-        var renderedOutput = ProjectListBody.projectsData.map(item => <ProjectComponent project={item}> {item["id"]} </ProjectComponent>)
+        var renderedOutput = ProjectListBody.projectsData.map(item => <ProjectComponent project={item}/>)
 
         // for(let i=0 ; i<ProjectListBody.projectsData.length ; i++){
         //     // console.log(ProjectListBody.projectsData[i]["id"]);
         // }
         var projectsColumn = {
-            marginTop: '-100',
+            marginTop: '-90px',
         };
         return(
             <div style={projects_and_users}>
