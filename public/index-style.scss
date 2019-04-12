@@ -9,8 +9,9 @@ body {
 
 @font-face {
   font-family: "IRANSansWeb";
-  src: url(./fonts/iransans-fonts/iransans/ttf/IRANSansWeb.ttf);
+  src: url(../src/styles/fonts/iransans-fonts/iransans/ttf/IRANSansWeb.ttf);
 }
+
 * {
 font-family: "IRANSansWeb";
 }

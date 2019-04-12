@@ -9,7 +9,7 @@ function FormRow(Props) {
         <input
           type={Props.inputType || 'text'}
           id={Props.inputId}
-          className="form-control input-box"
+          className="form-control"
           style={{
             width: '100%',
             height: '4vh',
