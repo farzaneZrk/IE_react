@@ -10,42 +10,6 @@ import Toplightblueline from '../components/Toplightblueline';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-<<<<<<< HEAD
-export default class UserProfile extends Component {
-    componentWillMount() {
-        document.title = 'Register';
-    }
-
-    render() {
-        return (
-            <div>
-                <PageHeader>
-                    <SlideShow />
-                </PageHeader>
-
-                <div className="toplightblueline" />
-                <div style={{ position: 'relative', zIndex: 100 }}>
-                    <BodyContent>
-                        <form action="./home">
-                            <FormRow inputId="firstName" labelText="نام  :" />
-                            <FormRow inputId="lastName" labelText="نام خانوادگی :" />
-                            <FormRow inputId="password" inputType="password" labelText="گذرواژه :" />
-                            <FormRow inputId="password2" inputType="password" labelText="تکرار گذرواژه :" />
-                            {/* <div className="form-group">
-                <label>عکس پروفایل:</label>
-                <input type="url" id="imageURL" class="form-control input-box" placeholder="https://example.com" pattern="https://.*" size='30' required />
-              </div> */}
-                            <FormRow inputId="jobTitle" labelText="عنوان شغل  :" />
-                            <FormRow inputId="id" labelText="شرح حال  :" />
-                            <CurveGreenButton text="ثبت نام" styles="" /><span dir="rtl"><a href="./home">  / ورود</a></span>
-                        </form>
-                    </BodyContent>
-                </div>
-            </div>
-        );
-    }
-}
-=======
 export default class Register extends Component <props, state>{
   interval:any;
   confirmedPassword: boolean;
@@ -177,4 +141,3 @@ interface state {
 }
 
 interface props {}
->>>>>>> dbbbb77dd53ee9ea7eec95afab909bcbf9ab0a3a

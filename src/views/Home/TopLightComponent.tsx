@@ -50,13 +50,13 @@ class TopLightComponent extends Component <props, State> {
 
         };
         var searchBox:CSSProperties = {
-                border: '1px solid rgb(205, 240, 251)',
+                border: '2px solid rgb(205, 240, 251)',
                 background: 'rgb(205, 240, 251)',
                 padding: '10px 10px 10px 20px',
                 position: 'absolute',
                 top: '0',
                 right: '0',
-                width: '80%',
+                width: '100%',
         };
 
         return (
