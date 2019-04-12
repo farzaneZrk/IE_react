@@ -19,7 +19,7 @@ ReactDOM.render(
         <Route exact path="/" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/home" component={Home} />
-        <Route path="/project/:projectId" component={Project} />
+        <Route path="/projects/:projectId" component={Project} />
         <Route path="/profile" component={UserProfile} />
         <Route path="/users/:userId" component={OtherUserProfile} />
         <Route path="/app" component={App} />

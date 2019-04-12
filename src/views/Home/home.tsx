@@ -12,10 +12,11 @@ import {CSSProperties} from "@material-ui/core/styles/withStyles";
 export default class Home extends Component<Props, State> {
     getProjectsData = () => {
         axios.create({
-            baseURL: 'http://localhost:8080/mysite/'
+            baseURL: 'http://localhost:8080/ca2_Web_exploded'
         })
             .get('/projects', {})
             .then((response : any) => {
+                console.log(response)
                 if (response.status !== 200){
                     ErrorHandlerService(response);
                 }
@@ -26,8 +27,9 @@ export default class Home extends Component<Props, State> {
     };
 
     getUserData = () => {
-        axios.get('http://localhost:8080/mysite/users', {})
+        axios.get('http://localhost:8080/ca2_Web_exploded/users', {})
             .then((response : any) => {
+                console.log(response)
                 if (response.status !== 200){
                     ErrorHandlerService(response);
                 }

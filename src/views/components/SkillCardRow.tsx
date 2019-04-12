@@ -51,7 +51,6 @@ interface props {
 interface Skill{
   name: string;
   point: number;
-  hasEndorsed: boolean;
 }
 
 export default SkillCardRow;
