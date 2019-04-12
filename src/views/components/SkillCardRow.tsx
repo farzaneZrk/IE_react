@@ -1,47 +1,30 @@
 import React, {Component} from 'react';
 import {CSSProperties} from "@material-ui/core/styles/withStyles";
+import SkillCard from './SkillCard';
 
 class SkillCardRow extends Component <props, {}>{
-  sa:Skill[] = [];
+  private static skillArrey:Skill[] = [];
+  private static onClick:any;
   constructor(props: props) {
     super(props);
-    this.sa = this.props.skills;
+    SkillCardRow.skillArrey = this.props.skills;
+    SkillCardRow.onClick = this.props.onClick;
     console.log(this.props.skills)
   }
 
 
   render() {
-    var sth:Skill = this.sa[0];
-    var name = '';
-    if (sth === undefined){
-      name = 'an';
-    }
-    else{
-      name = sth.name;
-    }
+    var renderedOutput = SkillCardRow.skillArrey.map((item, i) =>
+      <div key={i} className="skill-card-column" id={'skill' + i}>
+        <div className="skill-card">
+          <p>{item.name}<button title="!حذف مهارت" className="endorse-button blue-botton" onClick={SkillCardRow.onClick} value={item.name}>{item.point}</button></p>
+        </div>
+      </div>
+    )
 
     return (
       <div className="skill-card-row">
-        <div className="skill-card-column">
-          <div className="skill-card">
-            <p>{name}<button className="endorse-button blue-botton">{name}</button></p>
-          </div>
-        </div>
-        <div className="skill-card-column">
-          <div className="skill-card">
-            <p>CSS<button className="endorse-button blue-botton">3</button></p>
-          </div>
-        </div>
-        <div className="skill-card-column">
-          <div className="skill-card">
-            <p>javascript<button className="endorse-button blue-botton">16</button></p>
-          </div>
-        </div>
-        <div className="skill-card-column">
-          <div className="skill-card">
-            <p>typescript<button className="endorse-button red-botton">-</button></p>
-          </div>
-        </div>
+        {renderedOutput}
       </div>
     );
   }
@@ -49,6 +32,7 @@ class SkillCardRow extends Component <props, {}>{
 
 interface props {
   skills : Skill[];
+  onClick: any;
 }
 
 interface Skill{

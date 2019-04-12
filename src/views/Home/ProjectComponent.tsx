@@ -11,7 +11,7 @@ class ProjectComponent extends Component <props, State>{
     }
 
     render() {
-        var renderSkills = (ProjectComponent.projectData["skills"] as [] ).map(item => <span className="skill-block" key={item['id']}> {item["name"]} </span>);
+        var renderSkills = (ProjectComponent.projectData["skills"] as [] ).map(item => <span className="skill-block"> {item["name"]} </span>);
 
         var projectBlock = {
             padding: '3%',
@@ -72,7 +72,7 @@ class ProjectComponent extends Component <props, State>{
         var projectSkills = {
             color: 'rgb(156, 156, 156)',
         };
-        console.log(ProjectComponent.projectData);
+
         return(
             <div className="row" dir="rtl" style={projectBlock}>
                 <div className="col-md-12">
