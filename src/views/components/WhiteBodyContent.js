@@ -1,18 +1,19 @@
 import React from 'react';
 
 
-function BodyContent(Props) {
+function WhiteBodyContent(Props) {
   return (
     <div
       className="body-content"
       style={{
         marginTop: '-10%',
-        width: '43%',
+        width: '45%',
         height: '50%',
-        marginLeft: '25%',
+        marginLeft: '27.5%',
         marginRight: '20%',
         padding: '3%',
-        paddingTop: '1%',
+        paddingLeft: '10%',
+        paddingTop: '2%',
         borderRadius: '8px',
         marginBottom: '10%',
         // fontSize: '105%',
@@ -33,4 +34,4 @@ function BodyContent(Props) {
 //   style: propTypes.any,
 // };
 
-export default BodyContent;
+export default WhiteBodyContent;

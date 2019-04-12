@@ -24,7 +24,7 @@ font-family: "IRANSansWeb";
 .myPage {
   width: 100%;
   background: whitesmoke;
-  font-size: 1rem;
+  // font-size: 1rem;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -34,7 +34,10 @@ font-family: "IRANSansWeb";
   > footer {
     color: white;
     background: rgb(77, 76, 76);
+    font-size: 150%;
     width: 100%;
+    padding-top: 5%;
+    height: 10vh;
     margin: 0;
     text-align: center;
     transition: 200ms;

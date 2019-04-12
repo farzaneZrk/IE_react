@@ -16,6 +16,7 @@ class CurveGreenButton extends Component <props, State>{
     var linkStyle;
     if (this.state.hover) {
       linkStyle = {
+        marginBottom: '2%',
         marginTop: '2%',
         borderRadius: '4px',
         padding: '1.5%',
@@ -28,6 +29,7 @@ class CurveGreenButton extends Component <props, State>{
       }
     } else {
       linkStyle = {
+        marginBottom: '2%',
         marginTop: '2%',
         borderRadius: '4px',
         backgroundColor: 'rgba(3, 128, 128, 0.911)',
@@ -43,6 +45,7 @@ class CurveGreenButton extends Component <props, State>{
       <div style={{display: 'inline'}}>
         <button 
           style={linkStyle}
+          onClick={this.props.onClick || ''}
           type="submit"
           className="btn btn-default submint-button"
           onMouseEnter={this.toggleHover}
@@ -60,6 +63,7 @@ interface State {
 }
 
 interface props {
+  onClick: any;
   styles: any;
   text: string;
 }
