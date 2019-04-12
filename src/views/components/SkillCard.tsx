@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {CSSProperties} from "@material-ui/core/styles/withStyles";
 
 class SkillCard extends Component <props, {}>{
   private static skillData : Skill;
@@ -19,7 +18,7 @@ class SkillCard extends Component <props, {}>{
     console.log(SkillCard.skillNumber)
 
     return (
-      <div key={SkillCard.skillNumber} className="skill-card-column" id={'skill' + SkillCard.skillNumber}>
+      <div key={SkillCard.skillNumber} className="skill-card-column">
         <div className="skill-card">
           <p>{s.name}<button className="endorse-button blue-botton">{s.point}</button></p>
         </div>

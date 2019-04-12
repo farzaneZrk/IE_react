@@ -75,6 +75,10 @@ export default class UserProfile extends Component<props, state> {
   }
 
   addSkill = (event: any) => {
+    if (this.state.newSkill === '' || this.state.newSkill === '--  انتخاب مهارت  --'){
+      this.notify(3, '');
+      return;
+    }
     console.log(this.state.skills)
     let instance = axios.create({
       baseURL: 'http://localhost:8080/ca2_Web_exploded'
@@ -85,8 +89,9 @@ export default class UserProfile extends Component<props, state> {
       if (response.status !== 200){
         ErrorHandlerService(response);
       }
-      console.log(response.headers)
-      if (response.data.errorCode !== undefined){
+
+      if (response.data.errorCode === "200"){
+        this.notify(2, this.state.newSkill)
         return;
       }
       console.log(response.data);
@@ -124,6 +129,7 @@ export default class UserProfile extends Component<props, state> {
   componentDidMount = () => {
     this.getUserData();
     this.getSkillNames();
+    const { userId } = this.props.match.params
   };
 
   deleteSkill = (event: any) =>{
@@ -156,6 +162,12 @@ export default class UserProfile extends Component<props, state> {
     if (code === 1){
       toast.success(skillName + " به لیست مهارت‌های شما اضافه شد");
     }
+    else if (code === 2){
+      toast.error(skillName + " در لیست مهارت‌های شما وجود دارد");
+    }
+    else if (code === 3){
+      toast.error("ابتدا یک مهارت را انتخاب کنید");
+    }
     else
       toast.success(skillName + " از لیست مهارت‌های شما حذف شد");
   } 
@@ -167,18 +179,16 @@ export default class UserProfile extends Component<props, state> {
       skillOptions.push(<option value={element}>{element}</option>);
     });
 
-    // const data:Skill[] = this.state.skills;
-
     return (
       <div>
 
         <NavBar/>
 
-        <Toplightblueline marginTop="4.5%" padding="5%">
+        <Toplightblueline marginTop="-2%" padding="5%">
           <ShortLine />
-          <ShortLine width="24%" left="43%" />
+          <ShortLine width="24%" left="40%" />
         </Toplightblueline>
-
+        <ToastContainer rtl={true}/>
         <UserInfo
           name={this.state.name}
           jobTitle={this.state.jobTitle}
@@ -190,14 +200,21 @@ export default class UserProfile extends Component<props, state> {
           <label dir="rtl">مهارت‌ها: </label>
           <div className="selector-button">
             <select id="selcolor" onChange={this.setNewSkill}>
-              <option id="default-option">--  انتخاب مهارت  -- </option>
+              <option id="default-option">--  انتخاب مهارت  --</option>
               {skillOptions}
             </select>
             <button className="add-skill-button" onClick={this.addSkill}>افزودن مهارت</button>
           </div>
         </div>
 
-        { this.state.skills.length !== 0 && <SkillCardRow skills={this.state.skills} onClick={this.deleteSkill} /> }
+        { this.state.skills.length !== 0 && 
+          <SkillCardRow
+            skills={this.state.skills}
+            onClick={this.deleteSkill}
+            buttonTitle="!حذف مهارت"
+            class="remove-button blue-botton"
+          />
+        }
       </div>
     );
   }
@@ -219,4 +236,6 @@ interface Skill {
   hasEndorsed: boolean;
 }
 
-interface props {}
+interface props {
+  match: any;
+}

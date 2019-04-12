@@ -19,9 +19,9 @@ ReactDOM.render(
         <Route exact path="/" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/home" component={Home} />
-        <Route path="/project" component={Project} />
+        <Route path="/project/:projectId" component={Project} />
         <Route path="/profile" component={UserProfile} />
-        <Route path="/userProfile" component={OtherUserProfile} />
+        <Route path="/users/:userId" component={OtherUserProfile} />
         <Route path="/app" component={App} />
       </div>
     </Router>,

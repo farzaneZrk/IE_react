@@ -22,9 +22,4 @@ function Toplightblueline(Props) {
   );
 }
 
-// PageHeader.propTypes = {
-//   children: propTypes.any.isRequiered,
-//   style: propTypes.any,
-// };
-
 export default Toplightblueline;

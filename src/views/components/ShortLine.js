@@ -7,10 +7,10 @@ function ShortLine(Props) {
       className="body-content"
       style={{
         position: 'absolute',
-        left: Props.left || '41%',
+        left: Props.left || '38%',
         bottom: '0px',
         width: Props.width || '25%',
-        minWidth: '10vw',
+        // minWidth: '10vw',
         height: '20%',
         display: 'block',
         borderLeft: '20px solid transparent',
