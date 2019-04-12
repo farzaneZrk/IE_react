@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ErrorHandlerService } from './../../services/error-handler-service';
 import './../../styles/base.scss';
 import './otherUserProfile.scss';
-import NavBar from "../../views/components/NavBar";
+import NavBar from "../components/NavBar";
 
 export default class OtherUserProfile extends Component {
   componentWillMount() {

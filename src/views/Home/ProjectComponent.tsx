@@ -17,7 +17,7 @@ class ProjectComponent extends Component <props, State>{
             padding: '3%',
             paddingLeft: '0',
             paddingRight: '1%',
-            marginBottom: '1.5%',
+            marginBottom: '-1.5%',
             marginLeft:'5%',
             borderRadius: '4px',
             background: 'white',
