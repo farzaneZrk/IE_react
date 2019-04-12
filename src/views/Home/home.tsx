@@ -10,7 +10,7 @@ import ProjectListBody from "./ProjectListBody";
 export default class Home extends Component<Props, State> {
     getProjectsData = () => {
         axios.create({
-            baseURL: 'http://localhost:8080/mysite/'
+            baseURL: 'http://localhost:8080/ca2_Web_exploded'
         })
             .get('/projects', {})
             .then((response : any) => {

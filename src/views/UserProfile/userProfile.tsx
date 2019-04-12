@@ -8,6 +8,8 @@ import Toplightblueline from '../components/Toplightblueline';
 import ShortLine from '../components/ShortLine';
 import UserInfo from '../components/UserInfo';
 import SkillCardRow from '../components/SkillCardRow';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default class UserProfile extends Component<props, state> {
   getUserData = () => {
@@ -30,7 +32,7 @@ export default class UserProfile extends Component<props, state> {
       this.setState({ bio: myObj.bio });
       this.setState({ imageURL: myObj.imageUrl });
       console.log(myObj.skills)
-      this.initializeSkills(myObj.skills)
+      this.parseSkills(myObj.skills)
       // this.setState({skills: myObj.skills})
     })
     .catch(function (error : any) {
@@ -38,7 +40,7 @@ export default class UserProfile extends Component<props, state> {
     })
   }
 
-  initializeSkills = (skillsJson:any[]) =>{
+  parseSkills = (skillsJson:any[]) =>{
     let sl: Skill[] = [];
     skillsJson.forEach(element => {
       let endorsers: string[] = element.endorsers;
@@ -83,7 +85,15 @@ export default class UserProfile extends Component<props, state> {
       if (response.status !== 200){
         ErrorHandlerService(response);
       }
+      console.log(response.headers)
+      if (response.data.errorCode !== undefined){
+        return;
+      }
       console.log(response.data);
+      let s = this.state.skills
+      s.push({name: this.state.newSkill, point: 0, hasEndorsed: false})
+      this.setState({skills: s})
+      this.notify(1, this.state.newSkill);
     })
     .catch(function (error : any) {
       console.log(error);
@@ -116,12 +126,48 @@ export default class UserProfile extends Component<props, state> {
     this.getSkillNames();
   };
 
+  deleteSkill = (event: any) =>{
+    let selectedSkill = event.target.value
+    let instance = axios.create({
+      baseURL: 'http://localhost:8080/ca2_Web_exploded'
+    });
+    instance.delete("/users?id=1&skillName=" + selectedSkill)
+    .then((response : any) => {
+      if (response.status !== 200){
+        ErrorHandlerService(response);
+      }
+      console.log(response.data);
+      let s = this.state.skills
+      for (let i=s.length-1; i>=0; i--) {
+        if(s[i].name === selectedSkill) {
+          s.splice(i, 1);
+          break;
+        }
+      }
+      this.setState({skills: s})
+      this.notify(0, selectedSkill);
+    })
+    .catch(function (error : any) {
+      console.log(error);
+    })
+  }
+
+  notify = (code:number, skillName:string) =>{
+    if (code === 1){
+      toast.success(skillName + " به لیست مهارت‌های شما اضافه شد");
+    }
+    else
+      toast.success(skillName + " از لیست مهارت‌های شما حذف شد");
+  } 
+
   render() {
     const { skillNames } = this.state;
     var skillOptions:any[] = [];
     skillNames.forEach(element => {
       skillOptions.push(<option value={element}>{element}</option>);
     });
+
+    // const data:Skill[] = this.state.skills;
 
     return (
       <div>
@@ -151,30 +197,7 @@ export default class UserProfile extends Component<props, state> {
           </div>
         </div>
 
-        <div className="skill-card-row">
-          <div className="skill-card-column">
-            <div className="skill-card">
-              <p>HTML<button className="endorse-button blue-botton">5</button></p>
-            </div>
-          </div>
-          <div className="skill-card-column">
-            <div className="skill-card">
-              <p>CSS<button className="endorse-button blue-botton">3</button></p>
-            </div>
-          </div>
-          <div className="skill-card-column">
-            <div className="skill-card">
-              <p>javascript<button className="endorse-button blue-botton">16</button></p>
-            </div>
-          </div>
-          <div className="skill-card-column">
-            <div className="skill-card">
-              <p>typescript<button className="endorse-button red-botton">-</button></p>
-            </div>
-          </div>
-        </div>
-        {/* <p>{this.state.skills[0].name || ''}<button className="endorse-button blue-botton">{this.state.skills[0].name || ''}</button></p> */}
-        <SkillCardRow skills={this.state.skills}/>
+        { this.state.skills.length !== 0 && <SkillCardRow skills={this.state.skills} onClick={this.deleteSkill} /> }
       </div>
     );
   }
