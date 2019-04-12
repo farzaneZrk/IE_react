@@ -42,19 +42,17 @@ class TopLightComponent extends Component <props, State> {
         var inputBox:CSSProperties = {
             position: 'relative',
             backgroundColor: 'rgb(205, 240, 251)',
-            border: '3px solid rgb(205, 240, 251)',
+            border: '1px solid rgb(205, 240, 251)',
             borderBottom: '3px solid rgb(4, 179, 179)',
             marginLeft: '25%',
             marginRight: '25%',
-            height: '20%',
-
+            height: '25%',
         };
         var searchBox:CSSProperties = {
                 border: '2px solid rgb(205, 240, 251)',
                 background: 'rgb(205, 240, 251)',
                 padding: '10px 10px 10px 20px',
                 position: 'absolute',
-                top: '0',
                 right: '0',
                 width: '100%',
         };
