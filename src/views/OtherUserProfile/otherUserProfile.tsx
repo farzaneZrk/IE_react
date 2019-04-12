@@ -3,6 +3,7 @@ import axios from 'axios';
 import { ErrorHandlerService } from './../../services/error-handler-service';
 import './../../styles/base.scss';
 import './otherUserProfile.scss';
+import NavBar from "../../views/components/NavBar";
 
 export default class OtherUserProfile extends Component {
   componentWillMount() {
@@ -12,11 +13,7 @@ export default class OtherUserProfile extends Component {
   render() {
     return (
       <div>
-        <div className="navbar">
-          <img src={require('./images/logo/logo v1.png')} className="logoimg" />
-          <a href="#exit"><i className="fa fa-fw fa-user"></i>خروج</a>
-          <a href="/profile"><i className="fa fa-fw fa-user"></i>حساب کاربری</a>
-        </div>
+        <NavBar/>
 
         <div className="toplightblueline">
           <hr id="shortLine2" />

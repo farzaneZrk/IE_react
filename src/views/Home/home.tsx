@@ -42,7 +42,7 @@ export default class Home extends Component<Props, State> {
 
         return (
             <div>
-                <NavBar loginReference="./register"/>
+                <NavBar/>
                 <TopLightComponent/>
                 { data.length !== 0 && <ProjectListBody projects={data} /> }
             </div>

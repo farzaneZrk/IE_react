@@ -127,7 +127,6 @@ interface State {
 }
 
 interface props{
-  loginReference : any,
 }
 // import React, { Component } from 'react';
 //
