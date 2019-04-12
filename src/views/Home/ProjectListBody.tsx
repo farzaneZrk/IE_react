@@ -22,7 +22,7 @@ class ProjectListBody extends Component <props, State>{
         //     // console.log(ProjectListBody.projectsData[i]["id"]);
         // }
         var projectsColumn = {
-            marginTop: '-125px',
+            marginTop: '-50px',
         };
         return(
             <div className="col-sm-9" style={projectsColumn}>
