@@ -1,59 +1,134 @@
-import React from 'react';
+import React, {Component} from 'react';
 import navBarImage from './images/logo/logo v1.png';
+import {CSSProperties} from "@material-ui/core/styles/withStyles";
 
-function NavBar(Props) {
-  const navBar = {
+class NavBar extends Component <props, State>{
+
+  constructor(props: props) {
+    super(props);
+    this.state = {
+      exitHover: false,
+      accountHover: false,
+    };
+  }
+
+  toggleHoverExit = () =>{
+    this.setState({exitHover: !this.state.exitHover})
+  };
+
+  toggleHoverAccount = () =>{
+    this.setState({accountHover: !this.state.accountHover})
+  };
+
+render() {
+  const navBar:CSSProperties = {
     width: '100%',
     backgroundColor: 'white',
     overflow: 'auto',
     position: 'fixed',
     top: '0%',
-    zIndex: '5',
+    zIndex: 5,
   };
-  const navBarLink = {
-    float: 'left',
-    // padding: '12px',
-    color: 'black',
-    textDecoration: 'none',
-    padding: '1% 2%',
-    fontSize: '17px',
-  };
+  // const navBarLink:CSSProperties = {
+  //   float: 'left',
+  //   // padding: '12px',
+  //   color: 'black',
+  //   textDecoration: 'none',
+  //   padding: '1% 2%',
+  //   fontSize: '17px',
+  // };
+  //
+  // const firstLink:CSSProperties = {
+  //   float: 'left',
+  //   // padding: '12px',
+  //   color: 'black',
+  //   textDecoration: 'none',
+  //   padding: '1% 2%',
+  //   fontSize: '17px',
+  //   marginLeft: '10%',
+  // };
 
-  const firstLink = {
-    float: 'left',
-    // padding: '12px',
-    color: 'black',
-    textDecoration: 'none',
-    padding: '1% 2%',
-    fontSize: '17px',
-    marginLeft: '10%',
-  };
+  var exitLinkStyle:CSSProperties;
+    if (this.state.exitHover) {
+      exitLinkStyle = {
+        float: 'left',
+        // padding: '12px',
+        padding: '1% 2%',
+        background: 'rgba(167, 3, 3, 0.89)',
+        color: 'white',
+        fontSize: '17px',
+        textDecoration: 'none',
+        marginLeft: '10%',
+      }
+    } else {
+      exitLinkStyle = {
+        float: 'left',
+        // padding: '12px',
+        color: 'black',
+        textDecoration: 'none',
+        padding: '1% 2%',
+        fontSize: '17px',
+        marginLeft: '10%',
+      }
+    }
+
+    var accountLinkStyle:CSSProperties;
+    if (this.state.accountHover) {
+      accountLinkStyle = {
+        float: 'left',
+        // padding: '12px',
+        background: 'rgba(167, 3, 3, 0.89)',
+        color: 'white',
+        fontSize: '17px',
+        textDecoration: 'none',
+        padding: '1% 2%',
+      }
+    } else {
+      accountLinkStyle = {
+        float: 'left',
+        // padding: '12px',
+        color: 'black',
+        textDecoration: 'none',
+        padding: '1% 2%',
+        fontSize: '17px',
+      }
+    }
 
   return (
-    <div
-      style={navBar}
-    >
-      <img src={navBarImage} alt="logo" className="logoimg" />
-      <a style={firstLink} href="#exit">
-        <i className="fa fa-fw fa-user" />
-خروج
-      </a>
-      <a style={navBarLink} href={Props.loginReference}>
-        <i className="fa fa-fw fa-user" />
-حساب کاربری
-      </a>
-    </div>
+      <div
+          style={navBar}
+      >
+        <img src={navBarImage} alt="logo" className="logoimg"/>
+        <a style={exitLinkStyle}
+           onMouseEnter={this.toggleHoverExit}
+           onMouseLeave={this.toggleHoverExit}
+           href="#exit">
+          <i className="fa fa-fw fa-user"/>
+          خروج
+        </a>
+        <a href="/profile"
+           style={accountLinkStyle}
+           onMouseEnter={this.toggleHoverAccount}
+           onMouseLeave={this.toggleHoverAccount}
+           >
+          <i className="fa fa-fw fa-user"/>
+          حساب کاربری
+        </a>
+      </div>
   );
 }
-
-// PageHeader.propTypes = {
-//   children: propTypes.any.isRequiered,
-//   style: propTypes.any,
-// };
+}
 
 export default NavBar;
 
+interface State {
+  exitHover: boolean,
+  accountHover: boolean,
+}
 
+interface props{
+  loginReference : any,
+}
 // import React, { Component } from 'react';
 //
 // class Navbar2 extends Component <props, State>{

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ErrorHandlerService } from './../../services/error-handler-service';
 import './../../styles/base.scss';
 import './userProfile.scss';
-import Navbar from './../components/NavBar'
+import Navbar from '../components/NavBar'
 import Toplightblueline from '../components/Toplightblueline';
 import ShortLine from '../components/ShortLine';
 import UserInfo from '../components/UserInfo';
