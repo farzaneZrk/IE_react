@@ -14,7 +14,8 @@ class TopLightComponent extends Component <props, State> {
     };
 
     render() {
-        var searchButton:CSSProperties;
+        let searchButton:CSSProperties;
+
         if(!this.state.hover) {
             searchButton= {
                 position: 'absolute',
@@ -39,16 +40,19 @@ class TopLightComponent extends Component <props, State> {
                 color: 'black',
             }
         }
-        var inputBox:CSSProperties = {
+        let inputBox:CSSProperties = {
             position: 'relative',
             backgroundColor: 'rgb(205, 240, 251)',
             border: '1px solid rgb(205, 240, 251)',
             borderBottom: '3px solid rgb(4, 179, 179)',
             marginLeft: '25%',
             marginRight: '25%',
-            height: '25%',
+            height: '30%',
+            maxHeight: "50px",
+
         };
-        var searchBox:CSSProperties = {
+
+        let searchBox:CSSProperties = {
                 border: '2px solid rgb(205, 240, 251)',
                 background: 'rgb(205, 240, 251)',
                 padding: '10px 10px 10px 20px',
@@ -57,10 +61,33 @@ class TopLightComponent extends Component <props, State> {
                 width: '100%',
         };
 
+        let TopLightBlueLine:CSSProperties = {
+            marginTop: "-1%",
+            padding: "1em",
+            marginBottom: "15px",
+            border: "10px solid lightblue",
+            backgroundColor: "lightblue",
+            height: "22em",
+            position: "relative",
+        };
+
+        let TopLightBlueLineHeading:CSSProperties = {
+            marginRight: "10%",
+            fontWeight: "bold",
+            color: "rgb(3, 129, 129)",
+            marginBottom: "1.5%",
+            marginTop: "2%",
+        };
+
+        let TopLightBlueLineParagraph = {
+            marginRight: "13%",
+            marginBottom: "1.5%",
+        };
+
         return (
-            <div className="toplightblueline" dir="rtl">
-                <h1>جاب‌اونجا خوب است!</h1>
-                <p>
+            <div style={TopLightBlueLine} dir="rtl">
+                <h1 style={TopLightBlueLineHeading}>جاب‌اونجا خوب است!</h1>
+                <p style={TopLightBlueLineParagraph}>
                     تولید محتوای الکترونیک یکی از ابزارهای اساسی در زمینه کیفیت آموزش مجازی می باشد. بسیاری افراد آموزش
                     مجازی
                     را بدلیل نداشتن تعامل و ارتباط

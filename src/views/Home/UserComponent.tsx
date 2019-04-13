@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import {CSSProperties} from "@material-ui/core/styles/withStyles";
-import ProjectComponent from "src/views/Home/ProjectComponent";
 
 class UserComponent extends Component <props, State>{
-    private static userData : any;
     constructor(props: props) {
         super(props);
-        UserComponent.userData= props.user;
         this.state = {
         };
     }
@@ -41,17 +37,17 @@ class UserComponent extends Component <props, State>{
             color: 'rgb(145, 143, 143)',
         };
 
-        // console.log(UserComponent.userData["jobTitle"]);
+        // console.log(this.props.user["jobTitle"]);
         return(
             <div className="col-md-12">
                 <a>
                     <div style={userBlock} className="media" dir="rtl">
                         <div className="media-right">
-                            <img style={userImage} className="media-object" src={UserComponent.userData["imageURL"]} alt="user image"/>
+                            <img style={userImage} className="media-object" src={require('./images/b.png')} alt="user image"/>
                         </div>
                         <div style={userInfo} className="media-body">
-                            <h5 style={userName} className="media-heading">{UserComponent.userData["name"]}</h5>
-                            <p dir="rtl" style={userUserName}>{UserComponent.userData["job_title"]}</p>
+                            <h5 style={userName} className="media-heading">{this.props.user["name"]}</h5>
+                            <p dir="rtl" style={userUserName}>{this.props.user["job_title"]}</p>
                         </div>
                     </div>
                 </a>
