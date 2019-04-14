@@ -213,6 +213,7 @@ export default class UserProfile extends Component<props, state> {
             onClick={this.deleteSkill}
             buttonTitle="!حذف مهارت"
             class="remove-button blue-botton"
+            style={{marginLeft: '15%'}}
           />
         }
       </div>

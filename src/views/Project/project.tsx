@@ -149,6 +149,7 @@ export default class Project extends Component<props, state> {
                   onClick={this.getProjectData}
                   buttonTitle="!حذف مهارت"
                   class="remove-button blue-botton"
+                  style={{marginLeft: '0%'}}
                 />
               }
             </div>

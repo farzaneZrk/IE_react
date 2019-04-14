@@ -145,6 +145,7 @@ export default class OtherUserProfile extends Component<props, state> {
             onClick={this.endorseSkill}
             buttonTitle="تایید مهارت"
             class="endorse-button blue-botton"
+            style={{marginLeft: '15%'}}
           />
         }
       </div>

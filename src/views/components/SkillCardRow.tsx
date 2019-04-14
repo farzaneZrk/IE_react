@@ -17,7 +17,7 @@ class SkillCardRow extends Component <props, {}>{
 
   render() {
     var renderedOutput = SkillCardRow.skillArrey.map((item, i) =>
-      <div key={i} className="skill-card-column" id={'skill' + i}>
+      <div key={i} className="skill-card-column" id={'skill' + i} dir="ltr">
         <div className="skill-card">
           <p>
             {item.name}
@@ -25,7 +25,8 @@ class SkillCardRow extends Component <props, {}>{
             buttonTitle={this.props.buttonTitle}
             class={this.props.class}
             onClick={SkillCardRow.onClick}
-            value={item.name}>
+            value={item.name}
+            >
               {item.point}
             </SquareButton>
           </p>
@@ -34,7 +35,7 @@ class SkillCardRow extends Component <props, {}>{
     )
 
     return (
-      <div className="skill-card-row">
+      <div className="skill-card-row" style={this.props.style}>
         {renderedOutput}
       </div>
     );
@@ -46,6 +47,7 @@ interface props {
   onClick: any;
   buttonTitle: string;
   class: string;
+  style: any;
 }
 
 interface Skill{
