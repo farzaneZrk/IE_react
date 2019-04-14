@@ -1,28 +1,13 @@
-.toplightblueline {
-  margin-top: -2%;
-  padding: 3.5%;
-  margin-bottom: 15px;
-  border: 1px solid lightblue;
-  background-color: lightblue;
-  position: relative;
-}
-
-.toplightblueline hr {
-  display: block;
-  background-color: lightblue;
-  border: 1px solid lightblue;
-}
-
 .project-info{
   border: 1px solid white;
   background-color: white;
   border-radius: 4px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   height: auto;
-  width: 70%;
+  width: 65%;
   margin-top: -4%;
-  margin-left: 15%;
-  margin-right: 15%;
+  margin-left: 17.5%;
+  // margin-right: 17.5% !important;
   position: relative;
   padding-bottom: 3%;
   padding-right: 0;
@@ -56,18 +41,18 @@
 
 #priojrct-name {
   margin-right: 3%;
-  font-size: 3vw;
+  font-size: 230%;
 }
 
 #deadline{
   margin-right: 3%;
-  font-size: 1.3vw;
+  font-size: 130%;
   color: gray;
 }
 
 #budget{
   margin-right: 3%;
-  font-size: 1.3vw;
+  font-size: 130%;
   color: rgb(1, 146, 146);
 }
 
@@ -94,61 +79,6 @@
   color: rgb(1, 146, 146);
 }
 
-
-.endorse-button {
-  border: none;
-  border-radius: 4px;
-  color: white;
-  height:30px;
-  width:30px;
-  /* padding: 2%; */
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 100%;
-  margin-left: 10px;
-  margin-bottom: 5%;
-}
-
-.blue-botton{
-  background-color: rgb(156, 231, 241);
-  color:  rgb(102, 170, 179);
-}
-
-.skill-card-column {
-  float: left;
-  width: auto;
-  height: auto;
-  padding: 0 10px;
-  display: inline;
-}
-
-.skill-card-row {
-  margin: 0 -5px;
-  margin-left: 2%;
-  margin-right: 2%;
-  margin-bottom: 2%;
-}
-
-.skill-card-row:after {
-  content: "";		
-  clear: both;
-}
-
-.skill-card {
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-  padding: 5px;
-  padding-top: 7px;
-  padding-bottom: 0.5px;
-  text-align: left;
-  background-color:white;
-  border-radius: 4px;
-  font-size: 115%;
-  /* display: inline-block; */
-  margin-top:3%;
-  /* margin-bottom: 15%; */
-}
-
 .input-box { 
   position: relative; 
   display: flex;
@@ -160,26 +90,26 @@
   margin-right: 3%;
 }
 
-input { 
+.price-box{
   display: block; 
   border: 1px solid #d7d6d6; 
   background: #fff; 
   padding: 10px 10px 10px 20px; 
   width: 195px; 
-}
-.price-box{
   margin-right: 3%;
   position: relative;
   border: 3px solid rgb(4, 179, 179);
   border-radius: 4px;
-  width: 32%;
+  width: 38%;
+  text-align: right;
 }
 
 .unit { 
   position: absolute; 
   display: block; 
   /* left: 0%;  */
-  right: 29%;
+  // font-size: 1vw;
+  right: 22vw;
   top: 10px; 
   z-index: 2; 
   color: rgb(4, 179, 179);
@@ -196,7 +126,8 @@ input {
 }
 
 .send-button:hover {
-  background-color: maroon;
+  background-color: yellow;
+  color: black;
 }
 
 #desc2{
@@ -207,16 +138,26 @@ input {
   display: none;
 }
 
-@media screen and (max-width: 780px) {
-  .logoimg {
-      height: 110%;
-      width: 15%;
-  }
+.already-bid-status{
+  margin-right: 3%;
+  font-size: 1.5vw;
+  color: rgb(20, 168, 20);
+}
 
-  .toplightblueline {
-      margin-top: 8%;
-      padding: 5%;
-  }
+.deadline-reached-status{
+  margin-top: 3%;
+  margin-right: 3%;
+  font-size: 1.3vw;
+  color: red;
+}
+
+.winner{
+  margin-right: 3%;
+  font-size: 1.3vw;
+  color: rgb(19, 160, 19);
+}
+
+@media screen and (max-width: 780px) {
   .project-info{
       width: 90%;
       margin-top: -6%;
@@ -278,19 +219,7 @@ input {
       font-size: 120%;
       color: rgb(1, 146, 146);
   }
-
-  .endorse-button {
-      height:25px;
-      width:25px;
-      margin-top: 2px;    
-  }
   
-  .skill-card {
-      padding-top: 5px;
-      font-size: 90%;
-      height: 5.5vw;
-  }
-
   #label{
       font-weight:bold;
       font-size: 135%;

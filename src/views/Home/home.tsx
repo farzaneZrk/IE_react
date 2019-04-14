@@ -12,7 +12,7 @@ import {CSSProperties} from "@material-ui/core/styles/withStyles";
 export default class Home extends Component<Props, State> {
     getProjectsData = () => {
         axios.create({
-            baseURL: 'http://localhost:8080/mysite/'
+            baseURL: 'http://localhost:8080/ca2_Web_exploded'
         })
             .get('/projects', {})
             .then((response : any) => {
@@ -20,14 +20,12 @@ export default class Home extends Component<Props, State> {
                     ErrorHandlerService(response);
                 }
                 this.setState({ projectData: response.data.projects});
-
-
             });
 
     };
 
-    getUserData = () => {
-        axios.get('http://localhost:8080/mysite/users', {})
+    getUsersData = () => {
+        axios.get('http://localhost:8080/ca2_Web_exploded/users', {})
             .then((response : any) => {
                 if (response.status !== 200){
                     ErrorHandlerService(response);
@@ -47,7 +45,7 @@ export default class Home extends Component<Props, State> {
 
     componentDidMount = () => {
         this.getProjectsData();
-        this.getUserData();
+        this.getUsersData();
 
         document.title = 'Home';
 
@@ -62,12 +60,12 @@ export default class Home extends Component<Props, State> {
 
 
         var projects_and_users:CSSProperties = {
-            marginTop: '-35px !important',
+            marginTop: '-55px !important',
         };
 
         var rowStyle = {
-          marginRight:'15%',
-          marginLeft: '11.5%',
+          marginRight:'8%',
+          marginLeft: '3.8%',
         };
         return (
             <div>

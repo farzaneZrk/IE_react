@@ -40,7 +40,7 @@ class UserComponent extends Component <props, State>{
         // console.log(this.props.user["jobTitle"]);
         return(
             <div className="col-md-12">
-                <a>
+                <a href={"/users/" + this.props.user["id"]}>
                     <div style={userBlock} className="media" dir="rtl">
                         <div className="media-right">
                             <img style={userImage} className="media-object" src={require('./images/b.png')} alt="user image"/>

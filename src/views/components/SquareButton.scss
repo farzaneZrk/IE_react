@@ -38,11 +38,25 @@
   margin-left: 10px;
 }
 
-.remove-button:hover{
+.remove-button:hover{  
   background: rgba(189, 5, 5, 0.89);
   border: 2px solid rgba(119, 1, 1, 0.89);;
   color: rgba(119, 1, 1, 0.89);;
   text-decoration: none;
+}
+
+.no-hover-button{
+  padding: 1px;
+  border: none;
+  border-radius: 4px;
+  color: rgb(102, 170, 179);
+  height:30px;
+  width:30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 100%;
+  margin-left: 10px;
 }
 
 @media screen and (max-width: 780px) {

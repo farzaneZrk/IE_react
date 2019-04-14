@@ -23,7 +23,7 @@ class NavBar extends Component <props, State>{
 render() {
   return (
       <div className="navbar">
-        <a href="/home">
+        <a href="/home" title="خانه">
           <img
             src={require('./images/logo/logo v1.png')}
             className="logoimg"

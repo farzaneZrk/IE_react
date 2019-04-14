@@ -7,6 +7,14 @@ class ProjectComponent extends Component <props, State> {
         this.state = {};
     }
 
+    convertToPersianNumber = (input:any) => {
+        var persianDigits = "۰۱۲۳۴۵۶۷۸۹";
+        var persianMap = persianDigits.split("");
+        return input.replace(/\d/g,function(m:any){
+            return persianMap[parseInt(m)];
+        });
+    }
+
     render() {
         let renderSkills = (this.props.project["skills"] as []).map(item => <span
             className="skill-block" key={item["name"]}> {item["name"]} </span>);
@@ -81,14 +89,14 @@ class ProjectComponent extends Component <props, State> {
                         </div>
                         <div style={projectInfo} className="media-body">
                             <h6 style={projectTitle} className="media-heading">
-                                <a href="#theProject" style={projectLink}>
+                                <a href={"projects/" + this.props.project["id"]} style={projectLink}>
                                     <b>{this.props.project["title"]}   </b>
                                 </a>
                                 <span
                                     style={projectDeadline}>زمان باقی‌مانده: {this.props.project["deadline"]}</span>
                             </h6>
                             <p dir="rtl" style={projectDescription}>{this.props.project["description"]}</p>
-                            <h4 style={projectBudget}><b>بودجه:{this.props.project["budget"]} تومان</b></h4>
+                            <h4 style={projectBudget}><b>بودجه:{this.convertToPersianNumber(this.props.project["budget"].toString())} تومان</b></h4>
                             <h6 style={projectSkills}>مهارت‌ها:
                                 {renderSkills}
                             </h6>

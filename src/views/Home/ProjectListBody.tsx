@@ -16,6 +16,7 @@ class ProjectListBody extends Component <props, State>{
 
         let projectsColumn = {
             marginTop: '-50px',
+            marginBottom: '10%',
         };
         return(
             <div className="col-sm-9" style={projectsColumn}>

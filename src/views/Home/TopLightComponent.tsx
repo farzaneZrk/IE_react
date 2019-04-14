@@ -62,12 +62,12 @@ class TopLightComponent extends Component <props, State> {
         };
 
         let TopLightBlueLine:CSSProperties = {
-            marginTop: "-1%",
+            marginTop: "-2%",
             padding: "1em",
             marginBottom: "15px",
             border: "10px solid lightblue",
             backgroundColor: "lightblue",
-            height: "22em",
+            height: "19em",
             position: "relative",
         };
 
