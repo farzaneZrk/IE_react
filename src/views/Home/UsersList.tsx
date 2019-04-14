@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
-import ProjectComponent from "./ProjectComponent";
-import {CSSProperties} from "@material-ui/core/styles/withStyles";
 import UserComponent from './UserComponent'
 
 class UserList extends Component <props, State>{
-    private static usersData = [];
     constructor(props: props) {
         super(props);
-        UserList.usersData = props.users;
         this.state = {
         };
     }
 
     render() {
-        var renderedOutput = UserList.usersData.map(item => <UserComponent user={item} key={item['id']}/>);
+        var renderedOutput = this.props.users.map(item => <UserComponent user={item} key={item['id']}/>);
         var userSearch = {
             boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2)',
             width: '100%',

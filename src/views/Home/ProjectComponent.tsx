@@ -1,25 +1,23 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {CSSProperties} from "@material-ui/core/styles/withStyles";
 
-class ProjectComponent extends Component <props, State>{
-    private static projectData : any;
+class ProjectComponent extends Component <props, State> {
     constructor(props: props) {
         super(props);
-        ProjectComponent.projectData = props.project;
-        this.state = {
-        };
+        this.state = {};
     }
 
     render() {
-        var renderSkills = (ProjectComponent.projectData["skills"] as [] ).map(item => <span className="skill-block"> {item["name"]} </span>);
+        let renderSkills = (this.props.project["skills"] as []).map(item => <span
+            className="skill-block" key={item["name"]}> {item["name"]} </span>);
 
-        var projectBlock = {
+        let projectBlock = {
             padding: '3%',
             paddingLeft: '0',
             paddingRight: '1%',
-            marginBottom: '-1.5%',
-            marginLeft:'5%',
-            borderRadius: '4px',
+            marginBottom: '1.5%',
+            marginLeft: '5%',
+            borderRadius: '6px',
             background: 'white',
             boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2)',
 
@@ -49,7 +47,7 @@ class ProjectComponent extends Component <props, State>{
             color: 'black',
         };
 
-        var projectDeadline:CSSProperties = {
+        var projectDeadline: CSSProperties = {
             backgroundColor: 'rgba(211, 211, 211, 0.294)',
             borderRadius: '2px',
             color: 'gray',
@@ -73,22 +71,24 @@ class ProjectComponent extends Component <props, State>{
             color: 'rgb(156, 156, 156)',
         };
 
-        return(
+        return (
             <div className="row" dir="rtl" style={projectBlock}>
                 <div className="col-md-12">
                     <div className="media">
                         <div className="media-right">
-                            <img style={projectImage} className="media-object" src={ProjectComponent.projectData["imageURL"]} alt="project image"/>
+                            <img style={projectImage} className="media-object"
+                                 src={this.props.project["imageURL"]} alt="project image"/>
                         </div>
                         <div style={projectInfo} className="media-body">
                             <h6 style={projectTitle} className="media-heading">
                                 <a href="#theProject" style={projectLink}>
-                                    <b>{ProjectComponent.projectData["title"]}   </b>
+                                    <b>{this.props.project["title"]}   </b>
                                 </a>
-                                <span style={projectDeadline}>زمان باقی‌مانده: {ProjectComponent.projectData["deadline"]}</span>
+                                <span
+                                    style={projectDeadline}>زمان باقی‌مانده: {this.props.project["deadline"]}</span>
                             </h6>
-                            <p dir="rtl" style={projectDescription}>{ProjectComponent.projectData["description"]}</p>
-                            <h4 style={projectBudget}><b>بودجه:{ProjectComponent.projectData["budget"]} تومان</b></h4>
+                            <p dir="rtl" style={projectDescription}>{this.props.project["description"]}</p>
+                            <h4 style={projectBudget}><b>بودجه:{this.props.project["budget"]} تومان</b></h4>
                             <h6 style={projectSkills}>مهارت‌ها:
                                 {renderSkills}
                             </h6>
@@ -104,7 +104,7 @@ interface State {
 }
 
 interface props {
-    project : any,
+    project: any,
 }
 
 export default ProjectComponent;
