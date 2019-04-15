@@ -15,7 +15,7 @@ class ProjectListBody extends Component <props, State>{
         });
 
         let projectsColumn = {
-            marginTop: '-50px',
+            marginTop: '-60px',
             marginBottom: '10%',
         };
         return(

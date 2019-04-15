@@ -64,8 +64,9 @@ export default class Home extends Component<Props, State> {
         };
 
         var rowStyle = {
-          marginRight:'8%',
-          marginLeft: '3.8%',
+            marginRight:'15%',
+            marginLeft: '11.8%',
+            // marginTop:"110px",
         };
         return (
             <div>

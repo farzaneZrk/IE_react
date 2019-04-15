@@ -31,7 +31,7 @@ export default class UserProfile extends Component<props, state> {
       this.setState({ jobTitle: myObj.jobTitle });
       this.setState({ bio: myObj.bio });
       this.setState({ imageURL: myObj.imageUrl });
-      console.log(myObj.skills)
+      // console.log(myObj.skills)
       this.parseSkills(myObj.skills)
       // this.setState({skills: myObj.skills})
     })
@@ -79,22 +79,23 @@ export default class UserProfile extends Component<props, state> {
       this.notify(3, '');
       return;
     }
-    console.log(this.state.skills)
+    // console.log(this.state.skills)
     let instance = axios.create({
       baseURL: 'http://localhost:8080/ca2_Web_exploded'
     });
-    console.log("id=1&skillName=" + this.state.newSkill)
+    // console.log("id=1&skillName=" + this.state.newSkill)
     instance.put("/users?id=1&skillName=" + this.state.newSkill)
     .then((response : any) => {
+
       if (response.status !== 200){
         ErrorHandlerService(response);
-      }
 
+      }
       if (response.data.errorCode === "200"){
         this.notify(2, this.state.newSkill)
         return;
       }
-      console.log(response.data);
+      // console.log(response.data);
       let s = this.state.skills
       s.push({name: this.state.newSkill, point: 0, hasEndorsed: false})
       this.setState({skills: s})
@@ -103,6 +104,8 @@ export default class UserProfile extends Component<props, state> {
     .catch(function (error : any) {
       console.log(error);
     })
+    console.log("sakam")
+
   }
 
   setNewSkill = (event: any) => {
@@ -142,7 +145,7 @@ export default class UserProfile extends Component<props, state> {
       if (response.status !== 200){
         ErrorHandlerService(response);
       }
-      console.log(response.data);
+      // console.log(response.data);
       let s = this.state.skills
       for (let i=s.length-1; i>=0; i--) {
         if(s[i].name === selectedSkill) {

@@ -21,7 +21,7 @@ class UserList extends Component <props, State>{
         };
 
         var userColumn = {
-            marginTop: '-50px',
+            marginTop: '-60px',
         };
 
         return(
