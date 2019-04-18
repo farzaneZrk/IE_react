@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { ErrorHandlerService } from './../../services/error-handler-service';
-import './../../styles/base.scss';
+import { ErrorHandlerService } from '../../../services/error-handler-service';
+import './../../../styles/base.scss';
 import './userProfile.scss';
-import NavBar from '../components/NavBar'
-import Toplightblueline from '../components/Toplightblueline';
+import NavBar from '../../components/NavBar'
+import Toplightblueline from '../../components/Toplightblueline';
 import ShortLine from '../components/ShortLine';
 import UserInfo from '../components/UserInfo';
-import SkillCardRow from '../components/SkillCardRow';
+import SkillCardRow from '../../components/SkillCardRow';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

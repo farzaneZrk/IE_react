@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './../../styles/base.scss';
+import '../../../styles/base.scss';
 import './login.scss';
-import PageHeader from './../components/PageHeader';
-import WhiteBodyContent from './../components/WhiteBodyContent';
-import FormRow from './../components/FormRow';
-import CurveGreenButton from './../components/CurveGreenButton';
+import PageHeader from '../components/PageHeader';
+import WhiteBodyContent from '../components/WhiteBodyContent';
+import FormRow from '../components/FormRow';
+import CurveGreenButton from '../components/CurveGreenButton';
 
 export default class UserProfile extends Component {
     componentWillMount() {

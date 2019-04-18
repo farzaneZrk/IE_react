@@ -1,6 +1,6 @@
 import React from 'react';
-import border from './images/c.png';
-import profile from './images/b.png';
+import border from '../images/c.png';
+import profile from '../images/b.png';
 import './UserInfo.scss';
 
 
@@ -27,7 +27,7 @@ function UserInfo(Props) {
               <h1 className="media-heading" id="name">
                 <b>{Props.name}</b>
               </h1>
-              <h4 dir="rtl" id="jobtitle" className="UserInfoJobTitle" >
+              <h4 dir="rtl" id="jobtitle" className="UserInfoJobTitle">
                 {Props.jobTitle}
               </h4>
             </div>

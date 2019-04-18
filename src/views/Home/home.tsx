@@ -3,10 +3,10 @@ import axios from 'axios';
 import { ErrorHandlerService } from '../../services/error-handler-service';
 import './../../styles/base.scss';
 import './home.scss';
-import TopLightComponent from "./TopLightComponent";
+import TopLightComponent from "./components/TopLightComponent";
 import NavBar from '../components/NavBar'
-import ProjectListBody from "./ProjectListBody";
-import UserList from "./UsersList";
+import ProjectListBody from "./components/ProjectListBody";
+import UserList from "./components/UsersList";
 import {CSSProperties} from "@material-ui/core/styles/withStyles";
 
 export default class Home extends Component<Props, State> {

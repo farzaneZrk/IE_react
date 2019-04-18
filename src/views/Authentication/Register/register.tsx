@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import '../../styles/base.scss';
+import '../../../styles/base.scss';
 import './register.scss';
 import PageHeader from '../components/PageHeader';
 import WhiteBodyContent from '../components/WhiteBodyContent';
 import FormRow from '../components/FormRow';
 import CurveGreenButton from '../components/CurveGreenButton';
 import SlideShow from './components/SlideShow';
-import Toplightblueline from '../components/Toplightblueline';
+import Toplightblueline from '../../components/Toplightblueline';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

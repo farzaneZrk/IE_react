@@ -233,7 +233,7 @@ export default class Project extends Component<props, state> {
               { this.state.skills.length !== 0 && 
                 <SkillCardRow
                   skills={this.state.skills}
-                  onClick={this.bidProject}
+                  onClick="noAction"
                   buttonTitle="امتیاز لازم در این مهارت"
                   class="no-hover-button blue-botton"
                   style={{marginLeft: '0%'}}

@@ -74,7 +74,7 @@ class UserComponent extends Component <props, State>{
                          dir="rtl"
                     >
                         <div className="media-right">
-                            <img style={userImage} className="media-object" src={require('./images/b.png')} alt="user image"/>
+                            <img style={userImage} className="media-object" src={require('./../images/b.png')} alt="user image"/>
                         </div>
                         <div style={userInfo} className="media-body">
                             <h5 style={userName} className="media-heading">{this.props.user["name"]}</h5>
