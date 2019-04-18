@@ -38,9 +38,14 @@ class ProjectComponent extends Component <props, State> {
             fontWeight: "bold",
         };
 
-        let renderSkills = (this.props.project["skills"] as []).map(item => <span
-            style={skillBlock} key={item["name"]}> {item["name"]} </span>);
-
+        let renderSkills = (this.props.project["skills"] as []).map(item => 
+            <span
+                style={skillBlock}
+                key={item["name"]}
+            >
+                {item["name"]}
+            </span>
+        );
 
 
         let projectBlock;
@@ -94,13 +99,14 @@ class ProjectComponent extends Component <props, State> {
         if(!this.state.projectTitleHover){
             projectLink = {
                 color: 'black',
+                fontSize: "95%",
             };
         }
         else {
             projectLink = {
                 textDecoration : "none",
                 color: "rgb(223, 47, 70)",
-                fontSize: "110%",
+                // fontSize: "105%",
             }
         }
 
@@ -159,7 +165,7 @@ class ProjectComponent extends Component <props, State> {
                             </h6>
                             <p dir="rtl" style={projectDescription}>{this.props.project["description"]}</p>
                             <h4 style={projectBudget}><b>بودجه:{this.convertToPersianNumber(this.props.project["budget"].toString())} تومان</b></h4>
-                            <h6 style={projectSkills}>مهارت‌ها:
+                            <h6 style={projectSkills}><b>مهارت‌ها:</b>
                                 {renderSkills}
                             </h6>
                         </div>

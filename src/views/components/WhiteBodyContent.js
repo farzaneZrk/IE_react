@@ -9,7 +9,7 @@ function WhiteBodyContent(Props) {
         marginTop: '-10%',
         width: '45%',
         height: '50%',
-        marginLeft: '27.5%',
+        marginLeft: '25%',
         marginRight: '20%',
         padding: '3%',
         paddingLeft: '10%',
@@ -20,6 +20,7 @@ function WhiteBodyContent(Props) {
         border: '5px solid white',
         boxShadow: '0 10px 14px 10px rgba(0, 0, 0, 0.2)',
         background: 'white',
+        minWidth: '50%',
         ...Props.style,
       }}
       dir="rtl"

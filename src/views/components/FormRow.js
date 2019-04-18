@@ -19,7 +19,7 @@ function FormRow(Props) {
           className="form-control"
           style={{
             position: 'relative',
-            width: '37vw',
+            width: '42vw',
             height: '4vh',
             // marginBottom: '1%',
             marginTop: '1%',

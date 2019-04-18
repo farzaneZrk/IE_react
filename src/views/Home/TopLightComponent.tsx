@@ -43,7 +43,7 @@ class TopLightComponent extends Component <props, State> {
         let inputBox:CSSProperties = {
             position: 'relative',
             backgroundColor: 'rgb(205, 240, 251)',
-            border: '1px solid rgb(205, 240, 251)',
+            border: '3px solid rgb(205, 240, 251)',
             borderBottom: '3px solid rgb(4, 179, 179)',
             marginLeft: '25%',
             marginRight: '25%',
@@ -63,11 +63,11 @@ class TopLightComponent extends Component <props, State> {
 
         let TopLightBlueLine:CSSProperties = {
             marginTop: "-2%",
-            padding: "1em",
-            marginBottom: "15px",
+            // padding: "1em",
+            marginBottom: "35px",
             border: "10px solid lightblue",
             backgroundColor: "lightblue",
-            height: "22em",
+            height: "18em",
             position: "relative",
         };
 

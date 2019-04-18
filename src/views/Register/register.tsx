@@ -13,13 +13,8 @@ import 'react-toastify/dist/ReactToastify.css';
 export default class Register extends Component <props, state>{
   interval:any;
   confirmedPassword: boolean;
-  notifyError = (code:number) =>{
-    if (code === 1){
-      toast.error("دو پسورد وارد شده با یکدیگر تطابق ندارند!");
-    }
-    else
-      toast.error("لطفا هر دو فیلد پسورد را پر کنید!");
-  } 
+
+  notifyError = (msg:string) => { toast.error(msg); } 
   notifySuccess = () => toast.success("تغیرات با موفقیت اعمال شد.");
 
   constructor(props: props) {
@@ -43,7 +38,7 @@ export default class Register extends Component <props, state>{
       return
     }
     else if (this.state.cPassword !== '' && this.state.cPassword !== this.state.password){
-      this.notifyError(1)
+      this.notifyError("دو پسورد وارد شده با یکدیگر تطابق ندارند!");
     }
     else if (this.state.cPassword === this.state.password){
       this.confirmedPassword = true;
@@ -75,11 +70,18 @@ export default class Register extends Component <props, state>{
   
 
   handleConfirmPassword = (event: any) => {
-    this.setState({cPassword : event.target.value})
+    this.setState({cPassword : event.target.value});
   }
 
   handlePassword = (event: any) => {
-    this.setState({password : event.target.value})
+    this.setState({password : event.target.value});
+  }
+  
+  hasNumber = (event: any) => {
+    let pw:string = event.target.value;
+    if (!/\d/.test(pw)){
+      this.notifyError("پسورد باید شامل حداقل یک عدد باشد!")
+    }
   }
     
   render() {   
@@ -107,7 +109,7 @@ export default class Register extends Component <props, state>{
               />
               <FormRow 
                 inputId="password" inputType="password" labelText="گذرواژه :"
-                pattern=".*[0-9]+.*" title="شامل حداقل یک عدد "
+                pattern=".*[0-9]+.*" title="شامل حداقل یک عدد " onBlur={this.hasNumber}
                 onChange={this.handlePassword}
               />
               <FormRow 

@@ -22,7 +22,7 @@ export default class UserProfile extends Component {
                     <form action="./home">
                         <FormRow
                             inputId="username" labelText="نام کاربری :" title="حروف,.,-,_"
-                            pattern="[A-Za-zپ-ژ-گ-چ-أ-ي]+[A-Z0-9a-z.-_پ-ژ-گ-چ-أ-ي]*[A-Z0-9a-zپ-ژ-گ-چ-أ-ي]+"
+                            pattern="[A-Za-zپ-ژ-گ-چ-أ-ي]+[A-Z0-9a-z-.-_-پ-ژ-گ-چ-أ-ي]*[A-Z0-9a-zپ-ژ-گ-چ-أ-ي]+"
                         />
                         <FormRow
                             inputId="password" inputType="password" labelText="گذرواژه :"

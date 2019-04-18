@@ -63,17 +63,17 @@ export default class Home extends Component<Props, State> {
             marginTop: '-55px !important',
         };
 
-        var rowStyle = {
-            marginRight:'15%',
-            marginLeft: '11.8%',
-            // marginTop:"110px",
+        var rowStyle:CSSProperties = {
+            marginRight:'6%',
+            marginLeft: '2%',
         };
+
         return (
             <div>
                 <NavBar/>
                 <TopLightComponent/>
                 <div style={projects_and_users}>
-                    <div className="row" style={rowStyle}>
+                    <div className="Homerow" style={rowStyle}>
                         { projectData.length !== 0 && <ProjectListBody projects={projectData} /> }
                         { userData.length !== 0 && <UserList users={userData}/>}
                     </div>

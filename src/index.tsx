@@ -9,7 +9,6 @@ import UserProfile from './views/UserProfile/userProfile';
 import OtherUserProfile from './views/OtherUserProfile/otherUserProfile';
 import Register from './views/Register/register';
 import Project from './views/Project/project';
-import App from './App';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'react-notifications/lib/notifications.css';
 
@@ -22,7 +21,6 @@ ReactDOM.render(
         <Route path="/projects/:projectId" component={Project} />
         <Route path="/profile" component={UserProfile} />
         <Route path="/users/:userId" component={OtherUserProfile} />
-        <Route path="/app" component={App} />
       </div>
     </Router>,
     document.getElementById('root')
