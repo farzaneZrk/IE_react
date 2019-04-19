@@ -19,8 +19,8 @@ class UserComponent extends Component <props, State>{
             userBlock = {
                 boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2)',
                 marginBottom: '3%',
-                marginLeft: '-6%',
-                width: '112%',
+                marginLeft: '-2%',
+                width: '80%',
                 borderRadius: '4px',
                 background: 'white',
                 padding: '10px 10px 10px 20px',
@@ -29,8 +29,8 @@ class UserComponent extends Component <props, State>{
         else{
             userBlock = {
                 marginBottom: '3%',
-                marginLeft: '-6%',
-                width: '112%',
+                marginLeft: '-2%',
+                width: '80%',
                 background: 'white',
                 padding: '10px 10px 10px 20px',
                 boxShadow: "0 12px 14px 0 rgba(0, 0, 0, 0.2)",
