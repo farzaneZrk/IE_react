@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {CSSProperties} from "@material-ui/core/styles/withStyles";
-import Calendar from 'react-calendar';
 
 class ProjectComponent extends Component <props, State> {
     constructor(props: props) {

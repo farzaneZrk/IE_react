@@ -55,6 +55,7 @@ export default class Home extends Component<Props, State> {
 
     render() {
         const projectData:[] = this.state.projectData;
+        console.log("this"+projectData.length+"|")
 
         const userData:[] = this.state.userData;
 
@@ -74,7 +75,7 @@ export default class Home extends Component<Props, State> {
                 <TopLightComponent/>
                 <div style={projects_and_users}>
                     <div className="Homerow" style={rowStyle}>
-                        { projectData.length !== 0 && <ProjectListBody projects={projectData} /> }
+                        { projectData.length >= 0 && <ProjectListBody projects={projectData} /> }
                         { userData.length !== 0 && <UserList users={userData}/>}
                     </div>
                 </div>
