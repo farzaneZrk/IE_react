@@ -177,22 +177,6 @@ export default class Project extends Component<props, state> {
           onBlur={this.setPrice}
           onClick={this.bidProject}
         />
-        // <div>
-        //   <h3 id="label">ثبت پیشنهاد</h3>
-        //   <div className="input-box">
-        //     <input 
-        //       dir="ltr"
-        //       placeholder="پیشنهاد خود را وارد کنید"
-        //       className="price-box"
-        //       onChange={this.checkPrice}
-        //       onBlur={this.setPrice}
-        //       title="مبلغ پیشنهادی خود را با اعداد انگلیسی وارد کنید"
-        //       pattern="[1-9]+[.]{0,1}[0-9]+"
-        //     />
-        //     <span className="unit" dir="ltr">تومان</span>
-        //     <button className="send-button" type="submit" onClick={this.bidProject}>ارسال</button>
-        //   </div>
-        // </div>
     }
     return (
       <div>

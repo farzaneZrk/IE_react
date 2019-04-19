@@ -1,22 +1,21 @@
 import React, {Component} from 'react';
-import {CSSProperties} from "@material-ui/core/styles/withStyles";
 import SkillCard from './SkillCard';
 import SquareButton from './../components/SquareButton';
 import './SkillCardRow.scss'
 
 class SkillCardRow extends Component <props, {}>{
-  private static skillArrey:Skill[] = [];
-  private static onClick:any;
+  skillArrey:Skill[] = [];
+  onClick:any;
   constructor(props: props) {
     super(props);
-    SkillCardRow.skillArrey = this.props.skills;
-    SkillCardRow.onClick = this.props.onClick;
+    this.skillArrey = this.props.skills;
+    this.onClick = this.props.onClick;
     console.log(this.props.skills)
   }
 
 
   render() {
-    var renderedOutput = SkillCardRow.skillArrey.map((item, i) =>
+    var renderedOutput = this.skillArrey.map((item, i) =>
       <div key={i} className="skill-card-column" id={'skill' + i} dir="ltr">
         <div className="skill-card">
           <p>
@@ -24,7 +23,7 @@ class SkillCardRow extends Component <props, {}>{
             <SquareButton 
             buttonTitle={this.props.buttonTitle}
             class={this.props.class}
-            onClick={SkillCardRow.onClick}
+            onClick={this.onClick}
             value={item.name}
             >
               {item.point}

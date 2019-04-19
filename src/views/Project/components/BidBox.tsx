@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {CSSProperties} from "@material-ui/core/styles/withStyles";
-import './Navbar.scss'
+import './BidBox.scss'
 
 class BidBox extends Component <props, State>{
 

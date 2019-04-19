@@ -1,0 +1,62 @@
+
+.input-box { 
+  position: relative; 
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+#label{
+  margin-right: 3%;
+}
+
+.price-box{
+  display: block; 
+  border: 1px solid #d7d6d6; 
+  background: #fff; 
+  padding: 10px 10px 10px 20px; 
+  width: 195px; 
+  margin-right: 3%;
+  position: relative;
+  border: 3px solid rgb(4, 179, 179);
+  border-radius: 4px;
+  width: 38%;
+  text-align: right;
+}
+
+.unit { 
+  position: absolute; 
+  display: block; 
+  right: 22vw;
+  top: 10px; 
+  z-index: 2; 
+  color: rgb(4, 179, 179);
+}
+
+.send-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: rgb(4, 179, 179);
+  border: 1px solid #ddd;
+  color: white;
+  cursor: pointer;
+  margin-right: 3%
+}
+
+.send-button:hover {
+  background-color: yellow;
+  color: black;
+}
+
+
+@media screen and (max-width: 780px) {
+  #label{
+      font-weight:bold;
+      font-size: 135%;
+      margin-right: 3%;
+  }
+  
+  .unit{
+    right: 30vw;
+  }
+}
