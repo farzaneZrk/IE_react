@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {CSSProperties} from "@material-ui/core/styles/withStyles";
+import Calendar from 'react-calendar';
 
 class ProjectComponent extends Component <props, State> {
     constructor(props: props) {
@@ -9,6 +10,7 @@ class ProjectComponent extends Component <props, State> {
             projectBlockHover: false,
             deadline : '',
             interval: '',
+            deadlineIsOver: false,
         };
     }
 
@@ -22,16 +24,35 @@ class ProjectComponent extends Component <props, State> {
 
     setTime = () =>{
         let difference = Number(this.props.project["deadline"]) - new Date().getTime();
+        if(difference >= 0){
+            this.setState({deadlineIsOver: true});
+            this.setState({deadline: "مهلت پروژه به پایان رسیده است"});
+            return;
+        }
         let date = new Date(difference);
         let hours = date.getHours();
-        let minutes = "0" + date.getMinutes();
+        let minutes = date.getMinutes();
         let seconds = "0" + date.getSeconds();
-        let formattedTime = hours + " ساعت و" + minutes.substr(-2)+ " دقیقه و " + seconds.substr(-2) + " ثانیه";
+        let days = date.getDay();
+        let formattedTime;
+
+        if(days == 0 )
+            if(hours == 0)
+                if(minutes == 0)
+                    formattedTime = seconds.substr(-2) + " ثانیه";
+                else
+                    formattedTime =  minutes + " دقیقه و " + seconds.substr(-2) + " ثانیه";
+            else
+                formattedTime = hours + " ساعت و " + minutes + " دقیقه و " + seconds.substr(-2) + " ثانیه";
+        else
+            formattedTime = days + " روز و " + hours + " ساعت و " + minutes + " دقیقه و " + seconds.substr(-2) + " ثانیه";
+
         this.setState({deadline: formattedTime})
     };
 
     toggleProjectBlock = () =>{
-        this.setState({projectBlockHover: !this.state.projectBlockHover})
+        if(!this.state.deadlineIsOver)
+            this.setState({projectBlockHover: !this.state.projectBlockHover})
     };
 
     convertToPersianNumber = (input:any) => {
@@ -54,7 +75,7 @@ class ProjectComponent extends Component <props, State> {
             fontWeight: "bold",
         };
 
-        let renderSkills = (this.props.project["skills"] as []).map(item => 
+        let renderSkills = (this.props.project["skills"] as []).map(item =>
             <span
                 style={skillBlock}
                 key={item["name"]}
@@ -64,32 +85,59 @@ class ProjectComponent extends Component <props, State> {
         );
 
 
-        let projectBlock;
+        let projectBlock:CSSProperties;
         if(!this.state.projectBlockHover){
-            projectBlock= {
-                padding: '3%',
-                paddingLeft: '0',
-                paddingRight: '1%',
-                marginBottom: '1.5%',
-                marginLeft: '5%',
-                borderRadius: '6px',
-                background: 'white',
-                boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2)',
-            };
+            if(this.state.deadlineIsOver)
+                projectBlock= {
+                    padding: '3%',
+                    paddingLeft: '0',
+                    paddingRight: '1%',
+                    marginBottom: '1.5%',
+                    marginLeft: '5%',
+                    borderRadius: '6px',
+                    background: 'whitesmoke',
+                    boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2)',
+                    pointerEvents: "none",
+                    cursor: "not-allowed",
+                };
+            else
+                projectBlock= {
+                    padding: '3%',
+                    paddingLeft: '0',
+                    paddingRight: '1%',
+                    marginBottom: '1.5%',
+                    marginLeft: '5%',
+                    borderRadius: '6px',
+                    background: 'white',
+                    boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2)',
+                };
         }
         else{
-            projectBlock= {
-                padding: '3%',
-                paddingLeft: '0',
-                paddingRight: '1%',
-                marginBottom: '1.5%',
-                marginLeft: '5%',
-                background: 'white',
-                boxShadow: "0 12px 14px 0 rgba(0, 0, 0, 0.2)",
-                borderRadius: "4px",
-            };
+            if(this.state.deadlineIsOver)
+                projectBlock= {
+                    padding: '3%',
+                    paddingLeft: '0',
+                    paddingRight: '1%',
+                    marginBottom: '1.5%',
+                    marginLeft: '5%',
+                    background: 'whitesmoke',
+                    boxShadow: "0 12px 14px 0 rgba(0, 0, 0, 0.2)",
+                    borderRadius: "4px",
+                    pointerEvents: "none",
+                    cursor: "not-allowed",
+                };
+            else
+                projectBlock= {
+                    padding: '3%',
+                    paddingLeft: '0',
+                    paddingRight: '1%',
+                    marginBottom: '1.5%',
+                    marginLeft: '5%',
+                    background: 'white',
+                    boxShadow: "0 12px 14px 0 rgba(0, 0, 0, 0.2)",
+                    borderRadius: "4px",
+                }
         }
-
 
         let projectImage = {
             borderRadius: '2px',
@@ -125,17 +173,29 @@ class ProjectComponent extends Component <props, State> {
                 // fontSize: "105%",
             }
         }
-
-        let projectDeadline: CSSProperties = {
-            backgroundColor: 'rgba(211, 211, 211, 0.294)',
-            borderRadius: '2px',
-            color: 'gray',
-            padding: '0.5%',
-            fontSize: '59%',
-            position: 'absolute',
-            left: '3%',
-        };
-
+        let projectDeadline:CSSProperties;
+        if(!this.state.deadlineIsOver) {
+            projectDeadline = {
+                backgroundColor: 'rgba(211, 211, 211, 0.294)',
+                borderRadius: '2px',
+                color: 'gray',
+                padding: '0.5%',
+                fontSize: '59%',
+                position: 'absolute',
+                left: '3%',
+            };
+        }
+        else{
+            projectDeadline = {
+                backgroundColor: "rgb(2, 109, 109)",
+                borderRadius: "2px",
+                color: "white",
+                padding: "0.5%",
+                fontSize: "55%",
+                position: "absolute",
+                left: "3%",
+            }
+        }
         let projectDescription = {
             fontSize: '90%',
             color: 'rgba(31, 30, 30, 0.835)',
@@ -194,6 +254,7 @@ interface State {
     projectBlockHover: boolean,
     deadline: any,
     interval: any,
+    deadlineIsOver: boolean,
 }
 
 interface props {

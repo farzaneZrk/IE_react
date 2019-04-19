@@ -160,13 +160,6 @@ export default class Project extends Component<props, state> {
   };
 
   render() {
-    // let date = new Date(Number(this.state.deadline)*1000);
-    // let hours = date.getHours();
-    // let minutes = "0" + date.getMinutes();
-    // let seconds = "0" + date.getSeconds();
-    // // let formattedTime = hours + ':' + minutes.substr(-2) + ":" + seconds.substr(-2);
-    // this.setState({deadline: String(hours) + ":" + String(minutes) + ":" + String(seconds)});
-
     var lastPart;
     var winner = "";
     if (this.state.hasBid){
