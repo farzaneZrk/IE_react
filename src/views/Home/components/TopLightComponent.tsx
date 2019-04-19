@@ -67,7 +67,7 @@ class TopLightComponent extends Component <props, State> {
             marginBottom: "35px",
             border: "10px solid lightblue",
             backgroundColor: "lightblue",
-            height: "18em",
+            height: "20em",
             position: "relative",
         };
 

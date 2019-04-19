@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {CSSProperties} from "@material-ui/core/styles/withStyles";
+import Calendar from 'react-calendar';
 
 class ProjectComponent extends Component <props, State> {
     constructor(props: props) {
@@ -7,11 +8,27 @@ class ProjectComponent extends Component <props, State> {
         this.state = {
             projectTitleHover: false,
             projectBlockHover: false,
+            deadline : '',
+            interval: '',
         };
     }
 
     toggleProjectTitle = () =>{
         this.setState({projectTitleHover: !this.state.projectTitleHover})
+    };
+
+    componentDidMount = () => {
+        this.setState({interval:setInterval(this.setTime,1000)});
+    };
+
+    setTime = () =>{
+        let difference = Number(this.props.project["deadline"]) - new Date().getTime();
+        let date = new Date(difference);
+        let hours = date.getHours();
+        let minutes = "0" + date.getMinutes();
+        let seconds = "0" + date.getSeconds();
+        let formattedTime = hours + " ساعت و" + minutes.substr(-2)+ " دقیقه و " + seconds.substr(-2) + " ثانیه";
+        this.setState({deadline: formattedTime})
     };
 
     toggleProjectBlock = () =>{
@@ -134,10 +151,6 @@ class ProjectComponent extends Component <props, State> {
             color: 'rgb(156, 156, 156)',
         };
 
-        var date = new Date(this.props.project["deadline"]*1000);
-        var hours = date.getHours();
-        var minutes = "0" + date.getMinutes();
-        var formattedTime = hours + ':' + minutes.substr(-2);
 
         return (
             <div className="row"
@@ -161,7 +174,8 @@ class ProjectComponent extends Component <props, State> {
                                     <b>{this.props.project["title"]}   </b>
                                 </a>
                                 <span
-                                    style={projectDeadline}>زمان باقی‌مانده: {formattedTime}</span>
+                                    style={projectDeadline}>زمان باقی‌مانده:<span> {this.state.deadline}</span>
+                                </span>
                             </h6>
                             <p dir="rtl" style={projectDescription}>{this.props.project["description"]}</p>
                             <h4 style={projectBudget}><b>بودجه:{this.convertToPersianNumber(this.props.project["budget"].toString())} تومان</b></h4>
@@ -179,6 +193,8 @@ class ProjectComponent extends Component <props, State> {
 interface State {
     projectTitleHover: boolean,
     projectBlockHover: boolean,
+    deadline: any,
+    interval: any,
 }
 
 interface props {
