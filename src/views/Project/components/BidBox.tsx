@@ -15,34 +15,34 @@ class BidBox extends Component <props, State>{
     this.setState({hover: !this.state.hover})
   };
 
-render() {
-  return (
-      <div className="bidbox">
-        {/* <a href="/home" title="خانه">
-          <img
-            src={require('./images/logo/logo v1.png')}
-            className="logoimg"
+  render() {
+    return (
+      <div>
+        <h3 id="label">ثبت پیشنهاد</h3>
+        <div className="input-box">
+          <input 
+            dir="ltr"
+            placeholder="پیشنهاد خود را وارد کنید"
+            className="price-box"
+            onChange={this.props.onChange}
+            onBlur={this.props.onBlur}
+            title="مبلغ پیشنهادی خود را با اعداد انگلیسی وارد کنید"
+            pattern="[1-9]+[.]{0,1}[0-9]+"
           />
-        </a>
-        <a 
-           onMouseEnter={this.toggleHoverExit}
-           onMouseLeave={this.toggleHoverExit}
-           className="navbar-link"
-           href="/">
-          <i className="fa fa-fw fa-user"/>
-          خروج
-        </a>
-        <a href="/profile"
-           onMouseEnter={this.toggleHoverAccount}
-           onMouseLeave={this.toggleHoverAccount}
-           className="navbar-link"
-           >
-          <i className="fa fa-fw fa-user"/>
-          حساب کاربری
-        </a> */}
+          <span className="unit" dir="ltr">تومان</span>
+          <button 
+            className="send-button"
+            type="submit"
+            onClick={this.props.onClick}
+            onMouseEnter={this.toggleHover}
+            onMouseLeave={this.toggleHover}
+          >
+            ارسال
+          </button>
+        </div>
       </div>
-  );
-}
+    );
+  }
 }
 
 export default BidBox;
@@ -52,4 +52,7 @@ interface State {
 }
 
 interface props{
+  onChange: any;
+  onBlur: any;
+  onClick: any;
 }
