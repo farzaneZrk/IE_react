@@ -1,0 +1,102 @@
+#top-info{
+  padding: 3%;
+  margin-top: 0;
+}
+
+#projectImage {
+  border-radius: 0px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid rgb(235, 232, 232);
+  width: 13vw ;
+  height: 13vw ;
+}
+
+#priojrct-name {
+  margin-right: 3%;
+  font-size: 230%;
+}
+
+#deadline{
+  margin-right: 3%;
+  font-size: 130%;
+  color: gray;
+}
+
+#budget{
+  margin-right: 3%;
+  font-size: 130%;
+  color: rgb(1, 146, 146);
+}
+
+#desc{
+  margin-right: 3%;
+  font-size: 2vw;
+  color: rgb(20, 20, 20);
+}
+
+#project-description{
+  margin-right: 3%;
+  font-size: 100%;
+  color: rgb(20, 20, 20);
+}
+
+#desc2{
+  display: none;
+}
+
+#project-description2{
+  display: none;
+}
+
+.winner{
+  margin-right: 3%;
+  font-size: 1.3vw;
+  color: rgb(19, 160, 19);
+}
+
+
+@media screen and (max-width: 780px) {
+  #top-info{
+      padding: 2%;
+  }
+   
+  #projectImage {
+      width: 25vw ;
+      height: 25vw ;
+  }
+  
+  #priojrct-name {
+      margin-right: 3%;
+      font-size: 180%;
+  }
+  
+  #deadline{
+      font-size: 105%;
+      margin-top: 5%;
+      font-weight: bold;
+  }
+  
+  #budget{
+      font-size: 105%;
+      margin-top: 5%;
+      font-weight: bold;
+  }
+  
+  #desc{
+      display: none;
+  }
+  
+  #project-description{
+      display: none;
+  }
+
+  #desc2{
+      font-size: 140%;
+      display: inherit;
+  }
+  
+  #project-description2{
+      display: inherit;
+      color: rgb(49, 49, 49);
+  }
+}

@@ -14,7 +14,7 @@ margin-left: 15%;
 margin-right: 15%;
 margin-bottom: 3vw;
 height: auto;
-width:auto;
+width: auto;
 border-radius: 15px;
 font-size:160%;
 color:black;  
@@ -44,26 +44,12 @@ text-decoration: none;
 
 #selcolor{
 box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-width: 18vw;
+width: 22vw;
 background-color: rgb(243, 241, 241);
 border: 1px solid rgb(243, 241, 241);;
 border-radius: 0;
 font-size: 80%;
 padding: 3px;
-}
-
-#default-option{
-font-size: 5vw;
-}
-
-.body-content{
-  margin-left: 15%;
-  margin-right: 15%;
-}
-
-.rowup{
-    margin-top: 50px;
-    margin-left: 100px;
 }
 
 @media screen and (max-width: 780px) {

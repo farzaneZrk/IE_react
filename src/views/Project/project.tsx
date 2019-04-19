@@ -4,6 +4,9 @@ import { ErrorHandlerService } from './../../services/error-handler-service';
 import './../../styles/base.scss';
 import './project.scss';
 import NavBar from '../components/NavBar'
+import ProjectTopInfo from './components/ProjectTopInfo'
+import DeadlineReachedStatus from './components/DeadlineReachedStatus'
+import AlreadyBidStatus from './components/AlreadyBidStatus'
 import Toplightblueline from '../components/Toplightblueline';
 import SkillCardRow from '../components/SkillCardRow';
 import { ToastContainer, toast } from 'react-toastify';
@@ -14,9 +17,7 @@ export default class Project extends Component<props, state> {
   projectId:string;
 
   notifySuccess = () => toast.success("پیشنهاد شما با مبلغ " + this.state.price + " تومان ثبت شد.")
-  notifyError = (msg:string) =>{
-    toast.error(msg);
-  } 
+  notifyError = (msg:string) => { toast.error(msg); } 
 
   getProjectData = () => {
     console.log(this.projectId)
@@ -93,7 +94,7 @@ export default class Project extends Component<props, state> {
       this.notifyError("لطفا فقط از اعداد انگلیسی استفاده کنید");
       return;
     }
-    if(price < 10000){
+    if(price < 1000){
       this.notifyError("عدد وارد شده از کوچکترین عدد قابل قبول کوچکتر است!")
       return
     }
@@ -160,29 +161,14 @@ export default class Project extends Component<props, state> {
     
   render() {
     var lastPart;
-    var winner;
+    var winner = "";
     if (this.state.hasBid){
-      lastPart = 
-        <div className="already-bid-status">
-          <h4 >
-            <span className="flaticon-check-mark" />
-            شما قبلا پیشنهاد خود را ثبت کرده‌اید
-          </h4>
-        </div>  
-      
+      lastPart = <AlreadyBidStatus/>;
     }
-    //
     else if(this.state.isExpired){
-      lastPart = 
-        <div className="deadline-reached-status">
-          <h4>
-            <span className="flaticon-danger" />
-            مهلت ارسال پیشنهاد برای این پروژه به پایان رسیده است!
-          </h4> 
-        </div>
-      winner = <h4 className="winner"><span className="flaticon-check-mark"></span>برنده: {this.state.winner}</h4>
+      lastPart = <DeadlineReachedStatus/>;
+      winner = this.state.winner;
     }
-    //
     else{
       lastPart =
         <div>
@@ -208,25 +194,14 @@ export default class Project extends Component<props, state> {
         <Toplightblueline marginTop="-2%" padding="3.5%" />
         <ToastContainer rtl={true}/>
         <div className="project-info" dir="rtl">
-          <div className="row" id="top-info">
-            <div className="col-md-12">
-              <div className="media">
-                <div className="media-right">
-                  <img className="media-object" src={this.state.imageURL}  alt="project image" id="projectImage" />
-                </div>
-                <div className="media-body">
-                <h1 className="media-heading" id="priojrct-name"><b>{this.state.title}</b></h1>
-                <h4 id="deadline"><span className="flaticon-deadline"></span><b>زمان باقی‌مانده:</b> ۱۷ دقیقه و ۲۵ ثانیه</h4>
-                <h4 id="budget"><span className="flaticon-money-bag"></span><b>بودجه: {this.convertToPersianNumber(this.state.budget.toString())} تومان</b></h4>
-                {winner}
-                <h3 id="desc">توضیحات</h3>
-                <p dir="rtl" id="project-description">{this.state.description}</p>
-                </div>
-              </div>
-              <h3 id="desc2"><b>توضیحات</b></h3>
-              <p dir="rtl" id="project-description2">{this.state.description}</p>
-            </div>
-          </div>
+          <ProjectTopInfo
+            imageURL={this.state.imageURL}
+            title={this.state.title}
+            deadline={this.state.deadline}
+            budget={this.convertToPersianNumber(this.state.budget.toString())}
+            description={this.state.description}
+            winner={winner}
+          />
           <div className="row requairement-row" dir="rtl">
             <div className="col-md-12">
               <h3 id="req"><b>مهارت‌های لازم:</b></h3>

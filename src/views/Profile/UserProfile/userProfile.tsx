@@ -74,7 +74,7 @@ export default class UserProfile extends Component<props, state> {
     })
   }
 
-  addSkill = (event: any) => {
+  addSkill = () => {
     if (this.state.newSkill === '' || this.state.newSkill === '--  انتخاب مهارت  --'){
       this.notify(3, '');
       return;
@@ -104,7 +104,6 @@ export default class UserProfile extends Component<props, state> {
     .catch(function (error : any) {
       console.log(error);
     })
-    console.log("sakam")
 
   }
 
@@ -122,7 +121,10 @@ export default class UserProfile extends Component<props, state> {
       skills: [],
       skillNames: [],
       newSkill: '',
+      width: 0,
+      height: 0,
     };
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
   componentWillMount() {
@@ -132,8 +134,19 @@ export default class UserProfile extends Component<props, state> {
   componentDidMount = () => {
     this.getUserData();
     this.getSkillNames();
-    const { userId } = this.props.match.params
+    const { userId } = this.props.match.params;
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
   };
+  
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+  
+  updateWindowDimensions() {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
+    console.log(this.state.width)
+  }
 
   deleteSkill = (event: any) =>{
     let selectedSkill = event.target.value
@@ -203,7 +216,7 @@ export default class UserProfile extends Component<props, state> {
           <label dir="rtl">مهارت‌ها: </label>
           <div className="selector-button">
             <select id="selcolor" onChange={this.setNewSkill}>
-              <option id="default-option">--  انتخاب مهارت  --</option>
+              <option>--  انتخاب مهارت  --</option>
               {skillOptions}
             </select>
             <button className="add-skill-button" onClick={this.addSkill}>افزودن مهارت</button>
@@ -232,6 +245,8 @@ interface state {
   skills: Skill[];
   skillNames: string[];
   newSkill: string;
+  width: number;
+   height: number;
 }
 
 interface Skill {
