@@ -15,7 +15,7 @@ export default class UserProfile extends Component {
         return (
             <div>
                 <PageHeader backgroundColor="lightblue" >
-                    <img src={require('./images/logo/logo v1.png')} alt="logo"/>
+                    <img src={require('./../images/logo/logo v1.png')} alt="logo"/>
                 </PageHeader>
 
                 <WhiteBodyContent>

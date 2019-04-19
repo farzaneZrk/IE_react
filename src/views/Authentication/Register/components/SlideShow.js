@@ -1,6 +1,6 @@
 import React from 'react';
-import logo1 from '../images/logo/logo v1.png';
-import logo2 from '../images/logo/logo v2.png';
+import logo1 from '../../images/logo/logo v1.png';
+import logo2 from '../../images/logo/logo v2.png';
 
 
 function SlideShow() {
@@ -16,10 +16,5 @@ function SlideShow() {
     </div>
   );
 }
-
-// PageHeader.propTypes = {
-//   children: propTypes.any.isRequiered,
-//   style: propTypes.any,
-// };
 
 export default SlideShow;
