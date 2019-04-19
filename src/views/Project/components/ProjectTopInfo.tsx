@@ -10,6 +10,7 @@ class ProjectTopInfo extends Component <props, State> {
         this.state = {
             interval : null,
             deadline: null,
+            deadlineIsOver: false,
         };
     }
 
@@ -19,16 +20,32 @@ class ProjectTopInfo extends Component <props, State> {
 
     setTime = () =>{
         let difference = Number(this.props.deadline) - new Date().getTime();
+        if(difference >= 0){
+            this.setState({deadlineIsOver: true});
+            this.setState({deadline: "مهلت پروژه به پایان رسیده است"});
+            return;
+        }
         let date = new Date(difference);
         let hours = date.getHours();
-        let minutes = "0" + date.getMinutes();
+        let minutes = date.getMinutes();
         let seconds = "0" + date.getSeconds();
         let days = date.getDay();
-        console.log(difference);
+        let formattedTime;
 
-        let formattedTime = days + " روز و " + hours + " ساعت و " + minutes.substr(-2)+ " دقیقه و " + seconds.substr(-2) + " ثانیه";
+        if(days == 0 )
+            if(hours == 0)
+                if(minutes == 0)
+                    formattedTime = seconds.substr(-2) + " ثانیه";
+                else
+                    formattedTime =  minutes + " دقیقه و " + seconds.substr(-2) + " ثانیه";
+            else
+                formattedTime = hours + " ساعت و " + minutes + " دقیقه و " + seconds.substr(-2) + " ثانیه";
+        else
+            formattedTime = days + " روز و " + hours + " ساعت و " + minutes + " دقیقه و " + seconds.substr(-2) + " ثانیه";
+
         this.setState({deadline: formattedTime})
     };
+
 
     render() {
         let winner;
@@ -77,4 +94,6 @@ interface props {
 interface State {
     interval: any,
     deadline: any,
+    deadlineIsOver: boolean,
+
 }
