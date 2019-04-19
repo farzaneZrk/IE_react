@@ -8,6 +8,8 @@ import NavBar from '../components/NavBar'
 import ProjectListBody from "./components/ProjectListBody";
 import UserList from "./components/UsersList";
 import {CSSProperties} from "@material-ui/core/styles/withStyles";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default class Home extends Component<Props, State> {
     getProjectsData = () => {
@@ -40,6 +42,8 @@ export default class Home extends Component<Props, State> {
         this.state = {
             projectData: [],
             userData:[],
+            jobOnjaSearch: "",
+            userSearch: "",
         };
     }
 
@@ -51,11 +55,20 @@ export default class Home extends Component<Props, State> {
 
     };
 
-    // componentWillUnmount = () => {};
+    notifyError = (msg:string) => { toast.error(msg); } 
+
+    validateSearch = (event: any) => {
+        let sv = event.target.value
+        var PersianOrASCII = /^[آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهی ۱۲۳۴۵۶۷۸۹۰a-zA-z0-9]+$/ ;
+        if (!PersianOrASCII.test(sv)){
+            return this.notifyError("لطفا فقط از اعداد و حروف استفاده کنید.");
+        }
+        this.setState({jobOnjaSearch: sv})
+        return true;
+    }
 
     render() {
         const projectData:[] = this.state.projectData;
-        console.log("this"+projectData.length+"|")
 
         const userData:[] = this.state.userData;
 
@@ -65,18 +78,19 @@ export default class Home extends Component<Props, State> {
         };
 
         var rowStyle:CSSProperties = {
-            marginRight:'4%',
-            marginLeft: '4%',
+            marginRight:'2.5%',
+            marginLeft: '3%',
         };
 
         return (
             <div>
                 <NavBar/>
-                <TopLightComponent/>
+                <ToastContainer rtl={true}/>
+                <TopLightComponent onChangeinput={this.validateSearch} />
                 <div style={projects_and_users}>
                     <div className="Homerow" style={rowStyle}>
                         { projectData.length >= 0 && <ProjectListBody projects={projectData} /> }
-                        { userData.length !== 0 && <UserList users={userData}/>}
+                        { userData.length !== 0 && <UserList users={userData} onSearchChange={this.validateSearch} />}
                     </div>
                 </div>
             </div>
@@ -87,6 +101,8 @@ export default class Home extends Component<Props, State> {
 interface State {
     projectData: [];
     userData: [];
+    jobOnjaSearch: string;
+    userSearch: string;
 }
 
 interface Props {}

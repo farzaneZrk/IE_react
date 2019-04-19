@@ -93,7 +93,11 @@ class TopLightComponent extends Component <props, State> {
                     را بدلیل نداشتن تعامل و ارتباط
                 </p>
                 <div style={inputBox}>
-                    <input value="" placeholder="جستجو در جاب‌اونجا" style={searchBox}/>
+                    <input
+                        placeholder="جستجو در جاب‌اونجا"
+                        style={searchBox}
+                        onChange={this.props.onChangeinput}
+                    />
                     <button style={searchButton}
                             onMouseEnter={this.toggleHover}
                             onMouseLeave={this.toggleHover}
@@ -105,16 +109,13 @@ class TopLightComponent extends Component <props, State> {
     }
 }
 
-// PageHeader.propTypes = {
-//   children: propTypes.any.isRequiered,
-//   style: propTypes.any,
-// };
 
 interface State {
     hover: boolean;
 }
 
 interface props {
+    onChangeinput: any;
 }
 
 export default TopLightComponent;

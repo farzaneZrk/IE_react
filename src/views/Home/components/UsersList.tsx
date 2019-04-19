@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import UserComponent from './UserComponent'
 
-class UserList extends Component <props, State>{
+class UserList extends Component <props, {}>{
     constructor(props: props) {
         super(props);
-        this.state = {
-        };
     }
 
     render() {
@@ -27,18 +25,16 @@ class UserList extends Component <props, State>{
 
         return(
             <div className="col-sm-3" style={userColumn}>
-                <input dir="rtl" value="" placeholder="جستجو نام کاربر" style={userSearch}/>
+                <input dir="rtl" placeholder="جستجو نام کاربر" style={userSearch} onChange={this.props.onSearchChange}/>
                 {renderedOutput}
             </div>
         )
     }
 }
 
-interface State {
-}
-
 interface props {
-    users : []
+    users : [];
+    onSearchChange: any;
 }
 
 export default UserList;

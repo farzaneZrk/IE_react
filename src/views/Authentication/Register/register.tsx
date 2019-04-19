@@ -97,15 +97,15 @@ export default class Register extends Component <props, state>{
             <form action="/home">
               <FormRow 
                 inputId="firstName" labelText="نام  :" title="تنها حروف مجازند"
-                pattern={"[A-Za-z].{3,}" || "[پ-ژ-گ-چ-أ-ي].{3,}"}
+                pattern={"[آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیa-zA-Z]"}
               />
               <FormRow 
                 inputId="lastName" labelText="نام خانوادگی :" title="تنها حروف مجازند"
-                pattern={"[A-Za-z].{3,}" || "[پ-ژ-گ-چ-أ-ي].{3,}"}
+                pattern={"[آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیa-zA-Z]"}
               />
               <FormRow 
-                inputId="username" labelText="نام کاربری :" title="حروف,.,-,_"
-                pattern="[A-Za-zپ-ژ-گ-چ-أ-ي]+[A-Z0-9a-z.-_پ-ژ-گ-چ-أ-ي]*[A-Z0-9a-zپ-ژ-گ-چ-أ-ي]+"
+                inputId="username" labelText="نام کاربری :" title="حروف,.,_"
+                pattern={"[_.آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیa-zA-Z]*"}
               />
               <FormRow 
                 inputId="password" inputType="password" labelText="گذرواژه :"

@@ -10,8 +10,6 @@ class ProjectListBody extends Component <props, State>{
     }
 
     render() {
-        console.log("i get")
-
         let renderedOutput:any;
         renderedOutput = this.props.projects.map(item => {
             return (<ProjectComponent key={item['id']} project={item}/>);
