@@ -75,6 +75,7 @@ export default class Home extends Component<Props, State> {
         this.setState({projectSearchValue: event.target.value})
     }
 
+
     searchProjects = () => {
         axios.get('http://localhost:8080/ca2_Web_exploded/searchProjects', {
             params: {
@@ -85,10 +86,26 @@ export default class Home extends Component<Props, State> {
                 if (response.status !== 200){
                     ErrorHandlerService(response);
                 }
-                // this.setState({ userData: response.data.users});
+                this.setState({ projectData: response.data.projects});
                 console.log(response.data);
             });
     }
+
+    searchUsers = (value:any) => {
+        axios.get('http://localhost:8080/ca2_Web_exploded/searchUsers', {
+            params: {
+                searchKey: value
+            }
+        })
+            .then((response: any) => {
+                if (response.status !== 200) {
+                    ErrorHandlerService(response);
+                }
+                this.setState({userData: response.data.users});
+            });
+        console.log(value);
+
+    };
 
     render() {
         const projectData:[] = this.state.projectData;
@@ -104,7 +121,6 @@ export default class Home extends Component<Props, State> {
             marginRight:'2.5%',
             marginLeft: '3%',
         };
-
         return (
             <div>
                 <NavBar/>
@@ -113,7 +129,7 @@ export default class Home extends Component<Props, State> {
                 <div style={projects_and_users}>
                     <div className="Homerow" style={rowStyle}>
                         { projectData.length >= 0 && <ProjectListBody projects={projectData} /> }
-                        { userData.length !== 0 && <UserList users={userData} onSearchChange={this.validateSearch} />}
+                        {<UserList users={userData}  onSearchChange={this.searchUsers} />}
                     </div>
                 </div>
             </div>

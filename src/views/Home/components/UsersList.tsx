@@ -25,7 +25,10 @@ class UserList extends Component <props, {}>{
 
         return(
             <div className="col-sm-3" style={userColumn}>
-                <input dir="rtl" placeholder="جستجو نام کاربر" style={userSearch} onChange={this.props.onSearchChange}/>
+                <input dir="rtl" placeholder="جستجو نام کاربر"
+                       style={userSearch}
+                       onChange={e => this.props.onSearchChange(e.target.value)}/>
+
                 {renderedOutput}
             </div>
         )
