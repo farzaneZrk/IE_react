@@ -22,6 +22,7 @@ export default class Home extends Component<Props, State> {
                     ErrorHandlerService(response);
                 }
                 this.setState({ projectData: response.data.projects});
+                console.log(response.data)
             });
 
     };
@@ -44,6 +45,8 @@ export default class Home extends Component<Props, State> {
             userData:[],
             jobOnjaSearch: "",
             userSearch: "",
+            projectSearchValue: "",
+            userSearchValue: "",
         };
     }
 
@@ -67,6 +70,26 @@ export default class Home extends Component<Props, State> {
         return true;
     }
 
+    getPSearchValue = (event: any) => {
+        // this.setState({projectSearchValue: encodeURIComponent(event.target.value)})
+        this.setState({projectSearchValue: event.target.value})
+    }
+
+    searchProjects = () => {
+        axios.get('http://localhost:8080/ca2_Web_exploded/searchProjects', {
+            params: {
+                searchKey: this.state.projectSearchValue
+              }
+        })
+            .then((response : any) => {
+                if (response.status !== 200){
+                    ErrorHandlerService(response);
+                }
+                // this.setState({ userData: response.data.users});
+                console.log(response.data);
+            });
+    }
+
     render() {
         const projectData:[] = this.state.projectData;
 
@@ -86,7 +109,7 @@ export default class Home extends Component<Props, State> {
             <div>
                 <NavBar/>
                 <ToastContainer rtl={true}/>
-                <TopLightComponent onChangeinput={this.validateSearch} />
+                <TopLightComponent onClickButton={this.searchProjects} onBlurinput={this.getPSearchValue} onChangeinput={this.validateSearch} />
                 <div style={projects_and_users}>
                     <div className="Homerow" style={rowStyle}>
                         { projectData.length >= 0 && <ProjectListBody projects={projectData} /> }
@@ -103,6 +126,8 @@ interface State {
     userData: [];
     jobOnjaSearch: string;
     userSearch: string;
+    projectSearchValue: string;
+    userSearchValue: string;
 }
 
 interface Props {}

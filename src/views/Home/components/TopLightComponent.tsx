@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {CSSProperties} from "@material-ui/core/styles/withStyles";
+import { any } from 'prop-types';
 
 class TopLightComponent extends Component <props, State> {
     constructor(props: props) {
@@ -97,10 +98,12 @@ class TopLightComponent extends Component <props, State> {
                         placeholder="جستجو در جاب‌اونجا"
                         style={searchBox}
                         onChange={this.props.onChangeinput}
+                        onBlur={this.props.onBlurinput}
                     />
                     <button style={searchButton}
                             onMouseEnter={this.toggleHover}
                             onMouseLeave={this.toggleHover}
+                            onClick={this.props.onClickButton}
                             type="submit">جستجو
                     </button>
                 </div>
@@ -116,6 +119,8 @@ interface State {
 
 interface props {
     onChangeinput: any;
+    onBlurinput: any;
+    onClickButton: any;
 }
 
 export default TopLightComponent;
