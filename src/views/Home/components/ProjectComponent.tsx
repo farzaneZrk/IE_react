@@ -21,42 +21,34 @@ class ProjectComponent extends Component <props, State> {
         this.setState({interval:setInterval(this.setTime,1000)});
     };
 
-    // convert () {
-    //     var sec_num = parseInt(this, 10); // don't forget the second param
-    //     var hours   = Math.floor(sec_num / 3600);
-    //     var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-    //     var seconds = sec_num - (hours * 3600) - (minutes * 60);
-    //
-    //     if (hours   < 10) {hours   = "0"+hours;}
-    //     if (minutes < 10) {minutes = "0"+minutes;}
-    //     if (seconds < 10) {seconds = "0"+seconds;}
-    //     return hours+':'+minutes+':'+seconds;
-    // }
 
     setTime = () =>{
         let difference = Number(this.props.project["deadline"]) - new Date().getTime();
-        if(difference >= 0){
+        let hours,days,minutes,seconds;
+        if(difference <= 0){
             this.setState({deadlineIsOver: true});
             this.setState({deadline: "مهلت پروژه به پایان رسیده است"});
             return;
         }
-        let date = new Date(difference);
-        let hours = date.getHours();
-        let minutes = date.getMinutes();
-        let seconds = "0" + date.getSeconds();
-        let days = date.getDay();
+
+        difference /= 1000;
+        console.log(difference)
+        days = Math.floor(difference/60/60/24);
+        hours = Math.floor((difference - days*60*60*24)/60/60);
+        minutes = Math.floor((difference - days*60*60*24 - hours*60*60)/60);
+        seconds = Math.floor((difference - days*60*60*24 - hours*60*60 - minutes*60));
         let formattedTime;
 
         if(days == 0 )
             if(hours == 0)
                 if(minutes == 0)
-                    formattedTime = seconds.substr(-2) + " ثانیه";
+                    formattedTime = seconds + " ثانیه";
                 else
-                    formattedTime =  minutes + " دقیقه و " + seconds.substr(-2) + " ثانیه";
+                    formattedTime =  minutes + " دقیقه و " + seconds + " ثانیه";
             else
-                formattedTime = hours + " ساعت و " + minutes + " دقیقه و " + seconds.substr(-2) + " ثانیه";
+                formattedTime = hours + " ساعت و " + minutes + " دقیقه و " + seconds+ " ثانیه";
         else
-            formattedTime = days + " روز و " + hours + " ساعت و " + minutes + " دقیقه و " + seconds.substr(-2) + " ثانیه";
+            formattedTime = days + " روز و " + hours + " ساعت و " + minutes + " دقیقه و " + seconds + " ثانیه";
 
         this.setState({deadline: formattedTime})
     };
@@ -108,8 +100,6 @@ class ProjectComponent extends Component <props, State> {
                     borderRadius: '6px',
                     background: 'whitesmoke',
                     boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2)',
-                    pointerEvents: "none",
-                    cursor: "not-allowed",
                 };
             else
                 projectBlock= {
@@ -134,8 +124,6 @@ class ProjectComponent extends Component <props, State> {
                     background: 'whitesmoke',
                     boxShadow: "0 12px 14px 0 rgba(0, 0, 0, 0.2)",
                     borderRadius: "4px",
-                    pointerEvents: "none",
-                    cursor: "not-allowed",
                 };
             else
                 projectBlock= {

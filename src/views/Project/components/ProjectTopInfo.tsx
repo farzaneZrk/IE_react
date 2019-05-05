@@ -20,28 +20,31 @@ class ProjectTopInfo extends Component <props, State> {
 
     setTime = () =>{
         let difference = Number(this.props.deadline) - new Date().getTime();
-        if(difference >= 0){
+        let hours,days,minutes,seconds;
+        if(difference <= 0){
             this.setState({deadlineIsOver: true});
             this.setState({deadline: "مهلت پروژه به پایان رسیده است"});
             return;
         }
-        let date = new Date(difference);
-        let hours = date.getHours();
-        let minutes = date.getMinutes();
-        let seconds = "0" + date.getSeconds();
-        let days = date.getDay();
+
+        difference /= 1000;
+        console.log(difference)
+        days = Math.floor(difference/60/60/24);
+        hours = Math.floor((difference - days*60*60*24)/60/60);
+        minutes = Math.floor((difference - days*60*60*24 - hours*60*60)/60);
+        seconds = Math.floor((difference - days*60*60*24 - hours*60*60 - minutes*60));
         let formattedTime;
 
         if(days == 0 )
             if(hours == 0)
                 if(minutes == 0)
-                    formattedTime = seconds.substr(-2) + " ثانیه";
+                    formattedTime = seconds + " ثانیه";
                 else
-                    formattedTime =  minutes + " دقیقه و " + seconds.substr(-2) + " ثانیه";
+                    formattedTime =  minutes + " دقیقه و " + seconds + " ثانیه";
             else
-                formattedTime = hours + " ساعت و " + minutes + " دقیقه و " + seconds.substr(-2) + " ثانیه";
+                formattedTime = hours + " ساعت و " + minutes + " دقیقه و " + seconds+ " ثانیه";
         else
-            formattedTime = days + " روز و " + hours + " ساعت و " + minutes + " دقیقه و " + seconds.substr(-2) + " ثانیه";
+            formattedTime = days + " روز و " + hours + " ساعت و " + minutes + " دقیقه و " + seconds + " ثانیه";
 
         this.setState({deadline: formattedTime})
     };
