@@ -21,7 +21,6 @@ export default class Project extends Component<props, state> {
   notifyError = (msg:string) => { toast.error(msg); } 
 
   getProjectData = () => {
-    console.log(this.projectId)
     let instance = axios.create({
       baseURL: 'http://localhost:8080/ca2_Web_exploded'
     });
@@ -35,7 +34,6 @@ export default class Project extends Component<props, state> {
       if (response.status !== 200){
         ErrorHandlerService(response);
       }
-      console.log(response.data)
       var myObj = response.data;
       this.setState({ title: myObj.title});
       this.setState({ budget: myObj.budget });
@@ -45,7 +43,6 @@ export default class Project extends Component<props, state> {
       this.setState({ hasBid: myObj.hasBid });
       this.setState({ isExpired: myObj.isExpired });
       this.setState({id: myObj.id});
-      console.log(myObj.skills)
       this.parseSkills(myObj.skills)
     })
     .catch(function (error : any) {
@@ -56,7 +53,6 @@ export default class Project extends Component<props, state> {
   bidProject = () => {
     if(this.state.price === 0)
       return;
-    console.log(this.projectId)
     let instance = axios.create({
       baseURL: 'http://localhost:8080/ca2_Web_exploded/projects/'
     });
@@ -66,7 +62,6 @@ export default class Project extends Component<props, state> {
       if (response.status !== 200){
         ErrorHandlerService(response);
       }
-      console.log(response.data)
       this.notifySuccess();
       this.setState({hasBid: true})
     })
@@ -117,7 +112,6 @@ export default class Project extends Component<props, state> {
         { name: element.name, point: element.point }
       );
     });
-    console.log(sl)
     this.setState({skills: sl})
 
   }
@@ -160,6 +154,7 @@ export default class Project extends Component<props, state> {
   };
 
   render() {
+    console.log("salam" + this.state.hasBid)
     var lastPart;
     var winner = "";
     if (this.state.hasBid){
@@ -170,7 +165,7 @@ export default class Project extends Component<props, state> {
       winner = this.state.winner;
     }
     else{
-      lastPart = 
+      lastPart =
         <BidBox
           onChange={this.checkPrice}
           onBlur={this.setPrice}
