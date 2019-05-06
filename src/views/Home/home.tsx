@@ -22,7 +22,7 @@ export default class Home extends Component<Props, State> {
                     ErrorHandlerService(response);
                 }
                 this.setState({ projectData: response.data.projects});
-                console.log(response.data)
+                this.setState({projectsNumber: response.data.projecstnumber});
             });
 
     };
@@ -47,6 +47,9 @@ export default class Home extends Component<Props, State> {
             userSearch: "",
             projectSearchValue: "",
             userSearchValue: "",
+            pageNumber: 1,
+            projectPerPage: 5,
+            projectsNumber: 0,
         };
     }
 
@@ -121,17 +124,33 @@ export default class Home extends Component<Props, State> {
             marginRight:'2.5%',
             marginLeft: '3%',
         };
+
+        var pagerStyle = {
+            margin: "0 auto",
+            width: "50%",
+            padding: "10px"
+        }
+
         return (
             <div>
                 <NavBar/>
                 <ToastContainer rtl={true}/>
                 <TopLightComponent onClickButton={this.searchProjects} onBlurinput={this.getPSearchValue} onChangeinput={this.validateSearch} />
-                <div style={projects_and_users}>
+                <div className="row" style={projects_and_users}>
                     <div className="Homerow" style={rowStyle}>
-                        { projectData.length >= 0 && <ProjectListBody projects={projectData} /> }
+                        {<ProjectListBody projects={projectData} /> }
                         {<UserList users={userData}  onSearchChange={this.searchUsers} />}
                     </div>
                 </div>
+                <ul className="pagination justify-content-center" style={pagerStyle}>
+                    <li className="page-item"><a href="#" className="page-link">Previous</a></li>
+                    <li className="page-item"><a href="#" className="page-link">1</a></li>
+                    <li className="page-item"><a href="#" className="page-link">2</a></li>
+                    <li className="page-item"><a href="#" className="page-link">3</a></li>
+                    <li className="page-item"><a href="#" className="page-link">4</a></li>
+                    <li className="page-item"><a href="#" className="page-link">5</a></li>
+                    <li className="page-item"><a href="#" className="page-link">Next</a></li>
+                </ul>
             </div>
         );
     }
@@ -144,6 +163,9 @@ interface State {
     userSearch: string;
     projectSearchValue: string;
     userSearchValue: string;
+    pageNumber: number;
+    projectPerPage: number;
+    projectsNumber:number;
 }
 
 interface Props {}
