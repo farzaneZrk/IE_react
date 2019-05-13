@@ -179,7 +179,7 @@ export default class UserProfile extends Component<props, state> {
       toast.success(skillName + " به لیست مهارت‌های شما اضافه شد");
     }
     else if (code === 2){
-      toast.error(skillName + " در لیست مهارت‌های شما وجود دارد");
+        toast.error(skillName + " در لیست مهارت‌های شما وجود دارد");
     }
     else if (code === 3){
       toast.error("ابتدا یک مهارت را انتخاب کنید");

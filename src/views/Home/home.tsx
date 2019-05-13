@@ -10,19 +10,27 @@ import UserList from "./components/UsersList";
 import {CSSProperties} from "@material-ui/core/styles/withStyles";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import UserComponent from "src/views/Home/components/UsersList";
+import ProjectComponent from "src/views/Home/components/ProjectListBody";
 
 export default class Home extends Component<Props, State> {
     getProjectsData = () => {
         axios.create({
             baseURL: 'http://localhost:8080/ca2_Web_exploded'
         })
-            .get('/projects', {})
+            .get('/projects', {
+                params: {
+                    projectPerPage: this.state.projectPerPage,
+                    pageNumber: this.state.pageNumber
+                }
+            })
             .then((response : any) => {
                 if (response.status !== 200){
                     ErrorHandlerService(response);
                 }
                 this.setState({ projectData: response.data.projects});
-                this.setState({projectsNumber: response.data.projecstnumber});
+                this.setState({ projectsNumber: Number(response.data.projectNumber)});
+                this.setState({ indexOfLastProject: Number(response.data.elementsBeginIndex)});
             });
 
     };
@@ -34,7 +42,6 @@ export default class Home extends Component<Props, State> {
                     ErrorHandlerService(response);
                 }
                 this.setState({ userData: response.data.users});
-                console.log(response.data.users);
             });
     };
 
@@ -48,18 +55,27 @@ export default class Home extends Component<Props, State> {
             projectSearchValue: "",
             userSearchValue: "",
             pageNumber: 1,
-            projectPerPage: 5,
+            projectPerPage: 20,
             projectsNumber: 0,
+            indexOfLastProject: 0,
         };
+        this.setPageNumb = this.setPageNumb.bind(this)
     }
 
-    componentDidMount = () => {
+    componentWillMount = () => {
         this.getProjectsData();
         this.getUsersData();
 
         document.title = 'Home';
 
     };
+
+    componentDidUpdate(prevProps:any , prevState:any) {
+
+        if (this.state.indexOfLastProject !== this.state.pageNumber* this.state.projectPerPage + this.state.projectPerPage) {
+            this.getProjectsData();
+        }
+    }
 
     notifyError = (msg:string) => { toast.error(msg); } 
 
@@ -71,18 +87,21 @@ export default class Home extends Component<Props, State> {
         }
         this.setState({jobOnjaSearch: sv})
         return true;
-    }
+    };
 
     getPSearchValue = (event: any) => {
         // this.setState({projectSearchValue: encodeURIComponent(event.target.value)})
         this.setState({projectSearchValue: event.target.value})
-    }
+    };
 
 
     searchProjects = () => {
         axios.get('http://localhost:8080/ca2_Web_exploded/searchProjects', {
             params: {
-                searchKey: this.state.projectSearchValue
+                searchKey: this.state.projectSearchValue,
+                projectPerPage: this.state.projectPerPage,
+                pageNumber: this.state.pageNumber
+
               }
         })
             .then((response : any) => {
@@ -90,7 +109,6 @@ export default class Home extends Component<Props, State> {
                     ErrorHandlerService(response);
                 }
                 this.setState({ projectData: response.data.projects});
-                console.log(response.data);
             });
     }
 
@@ -106,11 +124,39 @@ export default class Home extends Component<Props, State> {
                 }
                 this.setState({userData: response.data.users});
             });
-        console.log(value);
 
     };
 
+
+
+    incProjectPerPage = () => {
+        this.setState({projectPerPage: this.state.projectPerPage+1})
+    };
+
+
+    decProjectPerPage = () => {
+        if(this.state.projectPerPage != 1)
+            this.setState({projectPerPage: this.state.projectPerPage-1})
+    };
+
+    incPageNumber = () => {
+        if(this.state.pageNumber != Math.ceil(this.state.projectsNumber/this.state.projectPerPage))
+            this.setState({pageNumber: this.state.pageNumber+1})
+    };
+
+
+    decPageNumber = () => {
+        if(this.state.projectPerPage != 1)
+            this.setState({pageNumber: this.state.pageNumber-1})
+    };
+
+    setPageNumb = (item:any) => {
+        this.setState({pageNumber: item.item})
+    };
+
+
     render() {
+        console.log("salam" + this.state.projectsNumber);
         const projectData:[] = this.state.projectData;
 
         const userData:[] = this.state.userData;
@@ -125,11 +171,33 @@ export default class Home extends Component<Props, State> {
             marginLeft: '3%',
         };
 
-        var pagerStyle = {
-            margin: "0 auto",
-            width: "50%",
-            padding: "10px"
-        }
+        let pageNumb:CSSProperties;
+
+        let pagingOutput:any;
+        let arr = [];
+        let i;
+
+        for (i = 0; i < Math.ceil(this.state.projectsNumber/this.state.projectPerPage) ; i++)
+            arr.push(i+1);
+
+
+        pagingOutput = arr.map(item => {
+            if(this.state.pageNumber == item)
+                pageNumb = {
+                    color: "white",
+                    backgroundColor: "blue",
+
+                };
+
+            else
+                pageNumb = {
+                    color : "blue",
+                };
+
+            return (<li className="page-item"><a onClick={() => this.setPageNumb({item})} style={pageNumb} href="#" className="page-link">{item}</a></li>);
+        });
+
+
 
         return (
             <div>
@@ -142,15 +210,22 @@ export default class Home extends Component<Props, State> {
                         {<UserList users={userData}  onSearchChange={this.searchUsers} />}
                     </div>
                 </div>
-                <ul className="pagination justify-content-center" style={pagerStyle}>
-                    <li className="page-item"><a href="#" className="page-link">Previous</a></li>
-                    <li className="page-item"><a href="#" className="page-link">1</a></li>
-                    <li className="page-item"><a href="#" className="page-link">2</a></li>
-                    <li className="page-item"><a href="#" className="page-link">3</a></li>
-                    <li className="page-item"><a href="#" className="page-link">4</a></li>
-                    <li className="page-item"><a href="#" className="page-link">5</a></li>
-                    <li className="page-item"><a href="#" className="page-link">Next</a></li>
-                </ul>
+                <div className="paging">
+                    <div>
+                        <ul className="pagination">
+                            <li className="page-item"><a onClick={this.decPageNumber} className="page-link">Previous</a></li>
+                            {pagingOutput}
+                            <li className="page-item"><a onClick={this.incPageNumber} className="page-link">Next</a></li>﻿﻿
+                        </ul>
+                    </div>
+                    <div>
+                        <ul className="pagination">
+                            <li className="page-item"><a onClick={this.decProjectPerPage} className="page-link">-</a></li>
+                            <li className="page-item"><a className="page-link">Project Per Page: {this.state.projectPerPage}</a></li>﻿
+                            <li className="page-item"><a onClick={this.incProjectPerPage} className="page-link">+</a></li>﻿﻿ ﻿
+                        </ul>
+                    </div>
+                </div>
             </div>
         );
     }
@@ -165,7 +240,8 @@ interface State {
     userSearchValue: string;
     pageNumber: number;
     projectPerPage: number;
-    projectsNumber:number;
+    projectsNumber: number;
+    indexOfLastProject: number;
 }
 
 interface Props {}

@@ -31,7 +31,7 @@ class ProjectComponent extends Component <props, State> {
             return;
         }
 
-        difference /= 1000;
+        // difference /= 1000;
         days = Math.floor(difference/60/60/24);
         hours = Math.floor((difference - days*60*60*24)/60/60);
         minutes = Math.floor((difference - days*60*60*24 - hours*60*60)/60);
