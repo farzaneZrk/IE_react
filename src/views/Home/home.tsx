@@ -55,7 +55,7 @@ export default class Home extends Component<Props, State> {
             projectSearchValue: "",
             userSearchValue: "",
             pageNumber: 1,
-            projectPerPage: 20,
+            projectPerPage: 10,
             projectsNumber: 0,
             indexOfLastProject: 0,
         };
