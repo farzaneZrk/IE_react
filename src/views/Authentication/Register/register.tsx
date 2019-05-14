@@ -13,8 +13,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Url } from 'url';
 import { runInThisContext } from 'vm';
+import { RouteComponentProps } from "react-router-dom";
 
-export default class Register extends Component <props, state>{
+export default class Register extends Component <props & RouteComponentProps<props>, state>{
   interval:any;
   confirmedPassword: boolean;
   confirmedUsername: boolean;
@@ -26,7 +27,7 @@ export default class Register extends Component <props, state>{
   notifyError = (msg:string) => { toast.error(msg); } 
   notifySuccess = () => toast.success("تغیرات با موفقیت اعمال شد.");
 
-  constructor(props: props) {
+  constructor(props: props & RouteComponentProps<props>) {
     super(props)
     this.state = {
       password: '',
@@ -332,7 +333,9 @@ export default class Register extends Component <props, state>{
         }
         console.log(response.data.msg)
         if(response.data.msg === 'ok'){
-          window.open("/home");
+          // window.open("/home");
+          let path = '/home';
+          this.props.history.push(path);
           console.log("res was ok");
         }
         else{

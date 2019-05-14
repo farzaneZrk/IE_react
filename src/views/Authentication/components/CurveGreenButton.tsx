@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { RouteComponentProps } from "react-router-dom";
+
 
 class CurveGreenButton extends Component <props, State>{
-  constructor(props: props) {
+  constructor(props: props ) {
     super(props);
     this.state = {
       hover: false
