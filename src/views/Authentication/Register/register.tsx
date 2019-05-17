@@ -90,7 +90,7 @@ export default class Register extends Component <props & RouteComponentProps<pro
     else{
       this.setState({
         registerStyle: {
-          // pointerEvents: 'none',
+          pointerEvents: 'none',
           opacity: '0.75',
         }
       });
@@ -183,7 +183,7 @@ export default class Register extends Component <props & RouteComponentProps<pro
   }
 
   checkFirstname = (firstname: string) => {
-    var PersianOrASCII = /^[آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیa-zA-z]+$/ ;
+    var PersianOrASCII = /^[ ‌آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیa-zA-z]+$/ ;
     if (!PersianOrASCII.test(firstname)){
       this.confirmFirstname = false;
       return this.notifyError("لطفا فقط از حروف استفاده کنید.");
@@ -196,7 +196,7 @@ export default class Register extends Component <props & RouteComponentProps<pro
   }
 
   checkLastname = (lastname: string) => {
-    var PersianOrASCII = /^[آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیa-zA-z]+$/ ;
+    var PersianOrASCII = /^[ ‌آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیa-zA-z]+$/ ;
     if (!PersianOrASCII.test(lastname)){
       this.confirmLastname = false;
       return this.notifyError("لطفا فقط از حروف استفاده کنید.");
@@ -223,7 +223,7 @@ export default class Register extends Component <props & RouteComponentProps<pro
   }
 
   checkJobTitle = (jobTitle: string) => {
-    var PersianOrASCII = /^[آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیa-zA-z]+$/ ;
+    var PersianOrASCII = /^[ ‌آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیa-zA-z]+$/ ;
     if (!PersianOrASCII.test(jobTitle)){
       this.confirmJobTitle = false;
       return this.notifyError("لطفا فقط از حروف استفاده کنید.");
@@ -349,9 +349,6 @@ export default class Register extends Component <props & RouteComponentProps<pro
             let path = '/home';
             this.setToken(response.data.jwt); // Setting the token in localStorage
             // return Promise.resolve(res);
-
-
-
             this.props.history.push(path);
             console.log("res was ok");
           }
