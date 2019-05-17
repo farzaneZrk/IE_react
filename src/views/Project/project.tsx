@@ -49,6 +49,10 @@ export default class Project extends Component<props & RouteComponentProps<props
       this.setState({ isExpired: myObj.isExpired });
       this.setState({id: myObj.id});
       this.setState({winner: myObj.winner})
+      if(myObj.winner.localeCompare("no one!") === 1){
+        console.log("in if")
+        this.setState({winner: 'بدون برنده!'})
+      }
       this.parseSkills(myObj.skills);
 
     })
@@ -172,14 +176,16 @@ export default class Project extends Component<props & RouteComponentProps<props
     var lastPart;
     var winner = "";
 
-    if(this.state.isExpired){
+    if (this.state.hasBid){
+      lastPart = <AlreadyBidStatus/>;
+      if(this.state.isExpired){
+        winner = this.state.winner;
+      }
+    }
+    else if(this.state.isExpired){
       lastPart = <DeadlineReachedStatus/>;
       winner = this.state.winner;
     }
-    else if (this.state.hasBid){
-      lastPart = <AlreadyBidStatus/>;
-    }
-
     else{
       lastPart =
         <BidBox
