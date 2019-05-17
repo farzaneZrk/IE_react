@@ -10,8 +10,12 @@ import UserInfo from '../components/UserInfo';
 import SkillCardRow from '../../components/SkillCardRow';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {RouteComponentProps} from "react-router";
+import AuthHelperMethods from "../../Authentication/Register/AutherChecker";
 
-export default class UserProfile extends Component<props, state> {
+const Auth = new AuthHelperMethods();
+
+export default class UserProfile extends Component<props & RouteComponentProps<props>, state>  {
   getUserData = () => {
     let instance = axios.create({
       baseURL: 'http://localhost:8080/ca2_Web_exploded'
@@ -19,14 +23,17 @@ export default class UserProfile extends Component<props, state> {
 
     instance.get('/users?', {
       params: {
-        userId: 1
+        userId: Auth.getLoggedInUser(),
+        jwt : Auth.getToken()
       }
     })
     .then((response : any) => {
       if (response.status !== 200){
         ErrorHandlerService(response);
       }
-      var myObj = response.data;
+      console.log("sag")
+      console.log(response)
+      let myObj = response.data;
       this.setState({ name: myObj.firstName + ' ' + myObj.lastName });
       this.setState({ jobTitle: myObj.jobTitle });
       this.setState({ bio: myObj.bio });
@@ -56,22 +63,30 @@ export default class UserProfile extends Component<props, state> {
   getSkillNames = () => {    
     let instance = axios.create()
 
-    instance.get("http://142.93.134.194:8000/joboonja/skill/")
+    instance.get("http://142.93.134.194:8000/joboonja/skill/", {
+      params: {
+        // jwt : Auth.getToken()
+      }
+    })
     .then((response : any) => {
       if (response.status !== 200){
         ErrorHandlerService(response);
       }
-      var arr: string[];
+      let arr: string[];
       arr = [];
       let i;
       for (i in response.data) {
         arr.push(response.data[i].name)
       }
       this.setState({skillNames: arr})
+      console.log(arr)
+
     })
-    .catch(function (error : any) {
-      console.log(error);
-    })
+        .catch(function (error : any) {
+          console.log(error);
+
+        })
+    console.log("pashm")
   }
 
   addSkill = () => {
@@ -80,11 +95,17 @@ export default class UserProfile extends Component<props, state> {
       return;
     }
     // console.log(this.state.skills)
+
     let instance = axios.create({
       baseURL: 'http://localhost:8080/ca2_Web_exploded'
     });
     // console.log("id=1&skillName=" + this.state.newSkill)
-    instance.put("/users?id=1&skillName=" + this.state.newSkill)
+
+    instance.put("/users?id=2842764&skillName=" + this.state.newSkill, {}, {
+      params: {
+        jwt : Auth.getToken()
+      }
+    })
     .then((response : any) => {
 
       if (response.status !== 200){
@@ -111,7 +132,7 @@ export default class UserProfile extends Component<props, state> {
     this.setState({newSkill : event.target.value})
   }
 
-  constructor(props: props) {
+  constructor(props: props & RouteComponentProps<props>) {
     super(props);
     this.state = {
       name: '',
@@ -137,6 +158,9 @@ export default class UserProfile extends Component<props, state> {
     const { userId } = this.props.match.params;
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
+    if (!Auth.loggedIn()) {
+      this.props.history.replace("/login");
+    }
   };
   
   componentWillUnmount() {
@@ -153,7 +177,11 @@ export default class UserProfile extends Component<props, state> {
     let instance = axios.create({
       baseURL: 'http://localhost:8080/ca2_Web_exploded'
     });
-    instance.delete("/users?id=1&skillName=" + selectedSkill)
+    instance.delete("/users?id=1&skillName=" + selectedSkill, {
+      params:{
+        jwt : Auth.getToken(),
+      }
+    })
     .then((response : any) => {
       if (response.status !== 200){
         ErrorHandlerService(response);
@@ -190,7 +218,7 @@ export default class UserProfile extends Component<props, state> {
 
   render() {
     const { skillNames } = this.state;
-    var skillOptions:any[] = [];
+    let skillOptions:any[] = [];
     skillNames.forEach(element => {
       skillOptions.push(<option value={element}>{element}</option>);
     });

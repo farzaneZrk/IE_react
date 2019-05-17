@@ -10,8 +10,12 @@ import UserInfo from '../components/UserInfo';
 import SkillCardRow from '../../components/SkillCardRow';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AuthHelperMethods from "../../Authentication/Register/AutherChecker";
+import {RouteComponentProps} from "react-router";
 
-export default class OtherUserProfile extends Component<props, state> {
+const Auth = new AuthHelperMethods();
+
+export default class OtherUserProfile extends Component<props & RouteComponentProps<props>, state> {
   userId:String;
   getUserData = () => {
     console.log(this.userId)
@@ -21,7 +25,8 @@ export default class OtherUserProfile extends Component<props, state> {
 
     instance.get('/users?', {
       params: {
-        userId: this.userId
+        userId: this.userId,
+        jwt : Auth.getToken()
       }
     })
     .then((response : any) => {
@@ -62,8 +67,12 @@ export default class OtherUserProfile extends Component<props, state> {
     });
 
     instance.put(
-      "/endorse?endorserId=1&endorsedId=" + this.userId + "&skillName=" + selectedSkill
-    )
+      "/endorse?endorserId=1&endorsedId=" + this.userId + "&skillName=" + selectedSkill, {} , {
+          params:{
+            jwt: Auth.getToken()
+          }
+        }
+      )
     .then((response : any) => {
       if (response.status !== 200){
         ErrorHandlerService(response);
@@ -90,7 +99,7 @@ export default class OtherUserProfile extends Component<props, state> {
     })
   }
 
-  constructor(props: props) {
+  constructor(props: props & RouteComponentProps<props>) {
     super(props);
     const { userId } = this.props.match.params
     this.userId = userId;
@@ -111,6 +120,9 @@ export default class OtherUserProfile extends Component<props, state> {
     this.getUserData();
     const { userId } = this.props.match.params
     this.userId = userId;
+    if (!Auth.loggedIn()) {
+      this.props.history.replace("/login");
+    }
   };
 
   notify = (code:number, skillName:string) =>{

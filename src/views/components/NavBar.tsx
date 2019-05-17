@@ -20,7 +20,13 @@ class NavBar extends Component <props, State>{
     this.setState({accountHover: !this.state.accountHover})
   };
 
-render() {
+  logout = () => {
+    // Clear user token and profile data from localStorage
+    localStorage.removeItem("id_token");
+  };
+
+
+    render() {
   return (
       <div className="navbar">
         <a href="/home" title="خانه">
@@ -32,8 +38,9 @@ render() {
         <a 
            onMouseEnter={this.toggleHoverExit}
            onMouseLeave={this.toggleHoverExit}
+           onClick={this.logout}
            className="navbar-link"
-           href="/">
+           href="/login">
           <i className="fa fa-fw fa-user"/>
           خروج
         </a>

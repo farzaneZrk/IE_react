@@ -14,6 +14,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Url } from 'url';
 import { runInThisContext } from 'vm';
 import { RouteComponentProps } from "react-router-dom";
+import decode from "jwt-decode";
+import AuthHelperMethods from "../Register/AutherChecker";
+
+const Auth = new AuthHelperMethods();
+
 
 export default class Register extends Component <props & RouteComponentProps<props>, state>{
   interval:any;
@@ -24,7 +29,7 @@ export default class Register extends Component <props & RouteComponentProps<pro
   confirmImageUrl: boolean;
   confirmJobTitle: boolean;
 
-  notifyError = (msg:string) => { toast.error(msg); } 
+  notifyError = (msg:string) => { toast.error(msg); }
   notifySuccess = () => toast.success("تغیرات با موفقیت اعمال شد.");
 
   constructor(props: props & RouteComponentProps<props>) {
@@ -74,18 +79,18 @@ export default class Register extends Component <props & RouteComponentProps<pro
 
   setSubmitButtonClickable = () => {
     if(this.confirmedUsername && this.confirmedPassword && (this.state.passwordBorder !== 'red' &&
-      this.confirmFirstname && this.confirmLastname && this.confirmJobTitle && this.confirmImageUrl )){
+        this.confirmFirstname && this.confirmLastname && this.confirmJobTitle && this.confirmImageUrl )){
       this.setState({
         registerStyle: {
-        pointerEvents: 'visible',
-        opacity: '1',
+          pointerEvents: 'visible',
+          opacity: '1',
         }
       });
     }
     else{
       this.setState({
         registerStyle: {
-          pointerEvents: 'none',
+          // pointerEvents: 'none',
           opacity: '0.75',
         }
       });
@@ -110,8 +115,11 @@ export default class Register extends Component <props & RouteComponentProps<pro
 
   componentDidMount() {
     this.interval = setInterval(() => this.checkPassword2(), 1000);
+    if (Auth.loggedIn()) {
+      this.props.history.replace("/home");
+    }
   }
-  
+
 
   handleConfirmPassword = (event: any) => {
     this.setState({cPassword : event.target.value});
@@ -120,12 +128,12 @@ export default class Register extends Component <props & RouteComponentProps<pro
   handlePassword = (event: any) => {
     this.setState({password : event.target.value});
   }
-  
+
   hasNumber = (event: any) => {
     let pw:string = event.target.value;
     console.log(event.target.value)
     console.log(event.target.value.length)
-    
+
     if (!/\d/.test(pw)){
       this.setState({passwordBorder: 'red'})
       this.notifyError("پسورد باید شامل حداقل یک عدد باشد!")
@@ -153,78 +161,78 @@ export default class Register extends Component <props & RouteComponentProps<pro
         username: username
       }
     })
-    .then((response : any) => {
-      if (response.status !== 200){
-          ErrorHandlerService(response);
-      }
-      console.log("hello" + response.data.isValid)
-      if(!response.data.isValid){
-        this.confirmedUsername = false;
-        this.setState({usernameBorder: 'red'});
-        this.notifyError("نام کاربری انتخاب شده تکراری است")
-      }
-      else{
-        this.confirmedUsername = true;
-        this.setState({usernameBorder: 'rgba(4, 179, 179, 0.509)'});
-        this.setSubmitButtonClickable();
-      }
-    })
-    .catch(function (error : any) {
-      console.log(error);
-    })
+        .then((response : any) => {
+          if (response.status !== 200){
+            ErrorHandlerService(response);
+          }
+          console.log("hello" + response.data.isValid)
+          if(!response.data.isValid){
+            this.confirmedUsername = false;
+            this.setState({usernameBorder: 'red'});
+            this.notifyError("نام کاربری انتخاب شده تکراری است")
+          }
+          else{
+            this.confirmedUsername = true;
+            this.setState({usernameBorder: 'rgba(4, 179, 179, 0.509)'});
+            this.setSubmitButtonClickable();
+          }
+        })
+        .catch(function (error : any) {
+          console.log(error);
+        })
   }
 
   checkFirstname = (firstname: string) => {
     var PersianOrASCII = /^[آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیa-zA-z]+$/ ;
-      if (!PersianOrASCII.test(firstname)){
-        this.confirmFirstname = false;
-        return this.notifyError("لطفا فقط از حروف استفاده کنید.");
-      }
-      if(firstname.length < 3){
-        this.confirmFirstname = false;
-        return this.notifyError("نام باید حداقل ۳ کاراکتر باشد.")
-      }
-      this.confirmFirstname = true;
+    if (!PersianOrASCII.test(firstname)){
+      this.confirmFirstname = false;
+      return this.notifyError("لطفا فقط از حروف استفاده کنید.");
+    }
+    if(firstname.length < 3){
+      this.confirmFirstname = false;
+      return this.notifyError("نام باید حداقل ۳ کاراکتر باشد.")
+    }
+    this.confirmFirstname = true;
   }
 
   checkLastname = (lastname: string) => {
     var PersianOrASCII = /^[آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیa-zA-z]+$/ ;
-      if (!PersianOrASCII.test(lastname)){
-        this.confirmLastname = false;
-        return this.notifyError("لطفا فقط از حروف استفاده کنید.");
-      }
-      if(lastname.length < 3){
-        console.log("i get it")
-        this.confirmLastname = false;
-        return this.notifyError("نام خانوادگی باید حداقل ۳ کاراکتر باشد.")
-      }
-      this.confirmLastname = true;
+    if (!PersianOrASCII.test(lastname)){
+      this.confirmLastname = false;
+      return this.notifyError("لطفا فقط از حروف استفاده کنید.");
+    }
+    if(lastname.length < 3){
+      console.log("i get it")
+      this.confirmLastname = false;
+      return this.notifyError("نام خانوادگی باید حداقل ۳ کاراکتر باشد.")
+    }
+    this.confirmLastname = true;
   }
 
   checkImageURL = (imageURL: string) => {
     var PersianOrASCII = /(https:[//]|http:[//])(.+)/ ; //complete it
-      if (!PersianOrASCII.test(imageURL)){
-        this.confirmImageUrl = false;
-        return this.notifyError("لطفا لینک عکس خود را وارد کنید.");
-      }
-      if(imageURL.length < 12){
-        this.confirmImageUrl = false;
-        return this.notifyError("لینک وارد شده نامعتبر است")
-      }
-      this.confirmImageUrl = true;
+    if (!PersianOrASCII.test(imageURL)){
+      this.confirmImageUrl = false;
+      return this.notifyError("لطفا لینک عکس خود را وارد کنید.");
+    }
+    if(imageURL.length < 12){
+      this.confirmImageUrl = false;
+      return this.notifyError("لینک وارد شده نامعتبر است")
+    }
+    this.confirmImageUrl = true;
   }
 
   checkJobTitle = (jobTitle: string) => {
     var PersianOrASCII = /^[آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیa-zA-z]+$/ ;
-      if (!PersianOrASCII.test(jobTitle)){
-        this.confirmJobTitle = false;
-        return this.notifyError("لطفا فقط از حروف استفاده کنید.");
-      }
-      if(jobTitle.length < 3){
-        this.confirmJobTitle = false;
-        return this.notifyError("عنوان شغلی باید حداقل ۲ کارکتر باشد.")
-      }
-      this.confirmJobTitle = true;
+    if (!PersianOrASCII.test(jobTitle)){
+      this.confirmJobTitle = false;
+      return this.notifyError("لطفا فقط از حروف استفاده کنید.");
+    }
+    if(jobTitle.length < 3){
+      this.confirmJobTitle = false;
+      return this.notifyError("عنوان شغلی باید حداقل ۲ کارکتر باشد.")
+    }
+    this.confirmJobTitle = true;
   }
 
   handleBlur = (event: any) => {
@@ -307,9 +315,13 @@ export default class Register extends Component <props & RouteComponentProps<pro
       default:
         break;
     }
-  }
+  };
+
+
 
   sendRegisterReq = () => {
+
+    console.log("LOGLOG")
     let instance = axios.create({
       baseURL: 'http://localhost:8080/ca2_Web_exploded'
     });
@@ -327,73 +339,143 @@ export default class Register extends Component <props & RouteComponentProps<pro
     // var self = this;
 
     instance.post('/registerUser', qs.stringify(data))
-    .then((response : any) => {
-        if (response.status !== 200){
+        .then((response : any) => {
+          if (response.status !== 200){
             ErrorHandlerService(response);
-        }
-        console.log(response.data.msg)
-        if(response.data.msg === 'ok'){
-          // window.open("/home");
-          let path = '/home';
-          this.props.history.push(path);
-          console.log("res was ok");
-        }
-        else{
-          this.notifyError("لطفا با نام کاربری دیگری تلاش کنید.")
-        }
-    });
-};
-    
-  render() {   
+          }
+          console.log(response.data.msg);
+          if(response.data.msg === 'ok'){
+            // window.open("/home");
+            let path = '/home';
+            this.setToken(response.data.jwt); // Setting the token in localStorage
+            // return Promise.resolve(res);
+
+
+
+            this.props.history.push(path);
+            console.log("res was ok");
+          }
+          else{
+            this.notifyError("لطفا با نام کاربری دیگری تلاش کنید.")
+          }
+        });
+  };
+
+  // loggedIn = () => {
+  //   const token = this.getToken(); // Getting token from localstorage
+  //   return !!token && !this.isTokenExpired(token); // handwaiving here
+  // };
+  //
+  setToken = (idToken:any) => {
+    // Saves user token to localStorage
+    localStorage.setItem("id_token", idToken);
+  };
+  //
+  // getToken = () => {
+  //   // Retrieves the user token from localStorage
+  //   return localStorage.getItem("id_token" )  || '{}';
+  // };
+  //
+  // isTokenExpired = (token:any) => {
+  //   try {
+  //       const decoded = decode(token);
+  //     // @ts-ignore
+  //     return decoded.exp < Date.now().valueOf() / 1000;
+  //   } catch (err) {
+  //     console.log("expired check failed! Line 42: AuthService.js");
+  //     return false;
+  //   }
+  // };
+  //
+  // getConfirm = () => {
+  //   let answer = decode(this.getToken());
+  //   return answer;
+  // };
+  //
+  // fetch = (url:any, options:any) => {
+  //   // performs api calls sending the required authentication headers
+  //   const headers = {
+  //     Accept: "application/json",
+  //     "Content-Type": "application/json",
+  //     "Authorization" : ""
+  //   };
+  //   // Setting Authorization header
+  //   // Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
+  //   if (this.loggedIn()) {
+  //     headers["Authorization"] = "Bearer " + this.getToken();
+  //   }
+  //
+  //   return fetch(url, {
+  //     headers,
+  //     ...options
+  //   })
+  //       .then(this._checkStatus)
+  //       .then(response => response.json());
+  // };
+  //
+  // _checkStatus = (response:any) => {
+  //   // raises an error in case response status is not a success
+  //   if (response.status >= 200 && response.status < 300) {
+  //     // Success status lies between 200 to 300
+  //     return response;
+  //   } else {
+  //     var error = new Error(response.statusText);
+  //     error.message = response;
+  //     throw error;
+  //   }
+  // };
+
+
+  render() {
     return (
-      <div>
-        <PageHeader>
-          <SlideShow />
-        </PageHeader>
-        <ToastContainer rtl={true}/>
-        <Toplightblueline marginTop="-5%" padding="6%" />
-        <div style={{ position: 'relative', zIndex: 100 }}>
-          <WhiteBodyContent>
-              <FormRow 
-                inputId="firstname" labelText="*نام  :" title="تنها حروف مجازند"
-                pattern={"[آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیa-zA-Z]*"}
-                onBlur={this.handleBlur} onChange={this.handlechange}
+        <div>
+          <PageHeader>
+            <SlideShow />
+          </PageHeader>
+          <ToastContainer rtl={true}/>
+          <Toplightblueline marginTop="-5%" padding="6%" />
+          <div style={{ position: 'relative', zIndex: 100 }}>
+            <WhiteBodyContent>
+              <FormRow
+                  inputId="firstname" labelText="*نام  :" title="تنها حروف مجازند"
+                  pattern={"[آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیa-zA-Z]*"}
+                  onBlur={this.handleBlur} onChange={this.handlechange}
               />
-              <FormRow 
-                inputId="lastname" labelText="*نام خانوادگی :" title="تنها حروف مجازند"
-                pattern={"[آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیa-zA-Z]*"}
-                onBlur={this.handleBlur} onChange={this.handlechange}
+              <FormRow
+                  inputId="lastname" labelText="*نام خانوادگی :" title="تنها حروف مجازند"
+                  pattern={"[آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیa-zA-Z]*"}
+                  onBlur={this.handleBlur} onChange={this.handlechange}
               />
-              <FormRow 
-                inputId="username" labelText="*نام کاربری :" title="حروف,.,_"
-                pattern={"[_.آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیa-zA-Z]*"}
-                onBlur={this.handleBlur} inputStyle={{borderColor:  this.state.usernameBorder}}
+              <FormRow
+                  inputId="username" labelText="*نام کاربری :" title="حروف,.,_"
+                  pattern={"[_.آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیa-zA-Z]*"}
+                  onBlur={this.handleBlur} inputStyle={{borderColor:  this.state.usernameBorder}}
               />
-              <FormRow 
-                inputId="password" inputType="password" labelText="*گذرواژه :"
-                pattern=".*[0-9]+.*" title="شامل حداقل یک عدد " onBlur={this.hasNumber}
-                onChange={this.handlePassword} inputStyle={{borderColor:  this.state.passwordBorder}}
+              <FormRow
+                  inputId="password" inputType="password" labelText="*گذرواژه :"
+                  pattern=".*[0-9]+.*" title="شامل حداقل یک عدد " onBlur={this.hasNumber}
+                  onChange={this.handlePassword} inputStyle={{borderColor:  this.state.passwordBorder}}
               />
-              <FormRow 
-                inputId="password2" inputType="password" labelText="*تکرار گذرواژه :"
-                pattern=".*[0-9]+.*" title="شامل حداقل یک عدد " onBlur={this.checkPassword}
-                onChange={this.handleConfirmPassword} inputStyle={{borderColor:  this.state.cpasswordBorder}}
+              <FormRow
+                  inputId="password2" inputType="password" labelText="*تکرار گذرواژه :"
+                  pattern=".*[0-9]+.*" title="شامل حداقل یک عدد " onBlur={this.checkPassword}
+                  onChange={this.handleConfirmPassword} inputStyle={{borderColor:  this.state.cpasswordBorder}}
               />
-              <FormRow 
-                inputId="imageURL" inputType="url" labelText="*عکس پروفایل :" 
-                placeHolder="https://example.com" pattern={"https://.*" || "http://.*"}
-                onBlur={this.handleBlur} onChange={this.handlechange}
-              />            
-              <FormRow 
-                inputId="jobTitle" labelText="*عنوان شغل  :" title="حروف,()" onChange={this.handlechange}
-                pattern="[A-Zپ-ژ-گ-چ-أ-يa-z-(-)].{3,}" onBlur={this.handleBlur}
+              <FormRow
+                  inputId="imageURL" inputType="url" labelText="*عکس پروفایل :"
+                  placeHolder="https://example.com" pattern={"https://.*" || "http://.*"}
+                  onBlur={this.handleBlur} onChange={this.handlechange}
+              />
+              <FormRow
+                  inputId="jobTitle" labelText="*عنوان شغل  :" title="حروف,()" onChange={this.handlechange}
+                  pattern="[A-Zپ-ژ-گ-چ-أ-يa-z-(-)].{3,}" onBlur={this.handleBlur}
               />
               <FormRow inputId="bio" labelText="شرح حال  :" onBlur={this.handleBlur} />
-              <CurveGreenButton text="ثبت نام" styles={this.state.registerStyle}  onClick={this.sendRegisterReq} /><span dir="rtl"><a href="/">  / ورود</a></span>
+              <CurveGreenButton text="ثبت نام" styles={this.state.registerStyle}  onClick={this.sendRegisterReq} /><span dir="rtl"><a href="/login">  / ورود</a></span>
               <p>لطفا همه‌ی بخش‌های * دار را پر کنید.</p>
-          </WhiteBodyContent>
+            </WhiteBodyContent>
+          </div>
         </div>
-      </div>
     );
   }
 }

@@ -12,6 +12,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import UserComponent from "src/views/Home/components/UsersList";
 import ProjectComponent from "src/views/Home/components/ProjectListBody";
+import AuthHelperMethods from "../Authentication/Register/AutherChecker";
+
+const Auth = new AuthHelperMethods();
 
 export default class Home extends Component<Props, State> {
     getProjectsData = () => {
@@ -21,7 +24,8 @@ export default class Home extends Component<Props, State> {
             .get('/projects', {
                 params: {
                     projectPerPage: this.state.projectPerPage,
-                    pageNumber: this.state.pageNumber
+                    pageNumber: this.state.pageNumber,
+                    jwt : Auth.getToken(),
                 }
             })
             .then((response : any) => {
@@ -36,7 +40,11 @@ export default class Home extends Component<Props, State> {
     };
 
     getUsersData = () => {
-        axios.get('http://localhost:8080/ca2_Web_exploded/users', {})
+        axios.get('http://localhost:8080/ca2_Web_exploded/users', {
+            params: {
+                jwt : Auth.getToken(),
+            }
+        })
             .then((response : any) => {
                 if (response.status !== 200){
                     ErrorHandlerService(response);
@@ -58,8 +66,33 @@ export default class Home extends Component<Props, State> {
             projectPerPage: 10,
             projectsNumber: 0,
             indexOfLastProject: 0,
+            confirm: null,
+            loaded: false,
         };
         this.setPageNumb = this.setPageNumb.bind(this)
+    }
+
+
+    componentDidMount(): void {
+        if (!Auth.loggedIn()) {
+            this.props.history.replace("/login");
+            console.log("is not logged in")
+        } else {
+            console.log("isLoggedIn")
+            try {
+                const confirm = Auth.getConfirm();
+                console.log("confirmation is:", confirm);
+                this.setState({
+                    confirm: true,
+                    loaded: true
+                });
+            } catch (err) {
+                console.log("catch")
+                console.log(err);
+                Auth.logout();
+                this.props.history.replace("/login");
+            }
+        }
     }
 
     componentWillMount = () => {
@@ -77,7 +110,7 @@ export default class Home extends Component<Props, State> {
         }
     }
 
-    notifyError = (msg:string) => { toast.error(msg); } 
+    notifyError = (msg:string) => { toast.error(msg); }
 
     validateSearch = (event: any) => {
         let sv = event.target.value
@@ -197,37 +230,53 @@ export default class Home extends Component<Props, State> {
             return (<li className="page-item"><a onClick={() => this.setPageNumb({item})} style={pageNumb} href="#" className="page-link">{item}</a></li>);
         });
 
-
-
-        return (
-            <div>
-                <NavBar/>
-                <ToastContainer rtl={true}/>
-                <TopLightComponent onClickButton={this.searchProjects} onBlurinput={this.getPSearchValue} onChangeinput={this.validateSearch} />
-                <div className="row" style={projects_and_users}>
-                    <div className="Homerow" style={rowStyle}>
-                        {<ProjectListBody projects={projectData} /> }
-                        {<UserList users={userData}  onSearchChange={this.searchUsers} />}
-                    </div>
-                </div>
-                <div className="paging">
+        if (this.state.loaded == true) {
+            if (this.state.confirm) {
+                console.log("confirmed!");
+                return (
                     <div>
-                        <ul className="pagination">
-                            <li className="page-item"><a onClick={this.decPageNumber} className="page-link">Previous</a></li>
-                            {pagingOutput}
-                            <li className="page-item"><a onClick={this.incPageNumber} className="page-link">Next</a></li>﻿﻿
-                        </ul>
+                        <NavBar/>
+                        <ToastContainer rtl={true}/>
+                        <TopLightComponent onClickButton={this.searchProjects} onBlurinput={this.getPSearchValue}
+                                           onChangeinput={this.validateSearch}/>
+                        <div className="row" style={projects_and_users}>
+                            <div className="Homerow" style={rowStyle}>
+                                {<ProjectListBody projects={projectData}/>}
+                                {<UserList users={userData} onSearchChange={this.searchUsers}/>}
+                            </div>
+                        </div>
+                        <div className="paging">
+                            <div>
+                                <ul className="pagination">
+                                    <li className="page-item"><a onClick={this.decPageNumber}
+                                                                 className="page-link">Previous</a></li>
+                                    {pagingOutput}
+                                    <li className="page-item"><a onClick={this.incPageNumber}
+                                                                 className="page-link">Next</a></li>
+                                    ﻿﻿
+                                </ul>
+                            </div>
+                            <div>
+                                <ul className="pagination">
+                                    <li className="page-item"><a onClick={this.decProjectPerPage}
+                                                                 className="page-link">-</a></li>
+                                    <li className="page-item"><a className="page-link">Project Per
+                                        Page: {this.state.projectPerPage}</a></li>
+                                    ﻿
+                                    <li className="page-item"><a onClick={this.incProjectPerPage}
+                                                                 className="page-link">+</a></li>﻿﻿ ﻿
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <ul className="pagination">
-                            <li className="page-item"><a onClick={this.decProjectPerPage} className="page-link">-</a></li>
-                            <li className="page-item"><a className="page-link">Project Per Page: {this.state.projectPerPage}</a></li>﻿
-                            <li className="page-item"><a onClick={this.incProjectPerPage} className="page-link">+</a></li>﻿﻿ ﻿
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        );
+                );
+            } else{
+                console.log("not confirmed!");
+                return null;
+            }
+        } else{
+            return null;
+        }
     }
 }
 
@@ -242,6 +291,10 @@ interface State {
     projectPerPage: number;
     projectsNumber: number;
     indexOfLastProject: number;
+    confirm: any,
+    loaded: any,
 }
 
-interface Props {}
+interface Props {
+    history:any,
+}

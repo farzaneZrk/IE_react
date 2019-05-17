@@ -12,9 +12,13 @@ import Toplightblueline from '../components/Toplightblueline';
 import SkillCardRow from '../components/SkillCardRow';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AuthHelperMethods from "../Authentication/Register/AutherChecker";
+import {RouteComponentProps} from "react-router";
+
+const Auth = new AuthHelperMethods();
 
 
-export default class Project extends Component<props, state> {
+export default class Project extends Component<props & RouteComponentProps<props>, state> {
   projectId:string;
 
   notifySuccess = () => toast.success("پیشنهاد شما با مبلغ " + this.state.price + " تومان ثبت شد.")
@@ -27,7 +31,8 @@ export default class Project extends Component<props, state> {
 
     instance.get('/projects?', {
       params: {
-        projectId: this.projectId
+        projectId: this.projectId,
+        jwt : Auth.getToken()
       }
     })
     .then((response : any) => {
@@ -57,7 +62,11 @@ export default class Project extends Component<props, state> {
       baseURL: 'http://localhost:8080/ca2_Web_exploded/projects/'
     });
 
-    instance.post('bid?bidAmount=' + this.state.price + '&projectId=' + this.state.id + '&userId=1')
+    instance.post('bid?bidAmount=' + this.state.price + '&projectId=' + this.state.id + '&userId=1',{}, {
+      params: {
+        jwt : Auth.getToken()
+      }
+    })
     .then((response : any) => {
       if (response.status !== 200){
         ErrorHandlerService(response);
@@ -124,7 +133,7 @@ export default class Project extends Component<props, state> {
       });
   }
   
-  constructor(props: props) {
+  constructor(props: props & RouteComponentProps<props>) {
     super(props);
     const { projectId } = this.props.match.params
     this.projectId = projectId;
@@ -151,6 +160,9 @@ export default class Project extends Component<props, state> {
     this.getProjectData();
     const { projectId } = this.props.match.params
     this.projectId = projectId;
+    if (!Auth.loggedIn()) {
+      this.props.history.replace("/login");
+    }
   };
 
   render() {

@@ -11,11 +11,18 @@ import Register from './views/Authentication/Register/register';
 import Project from './views/Project/project';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'react-notifications/lib/notifications.css';
+import { createStore, applyMiddleware } from 'redux'
+// import reducers from './reducers';
+
+
+// const createStoreWithMiddleware = applyMiddleware()(createStore);
+// const store = createStoreWithMiddleware(reducers);
+
 
 ReactDOM.render(
     <Router>
       <div>
-        <Route exact path="/" component={Login} />
+        <Route exact path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/home" component={Home} />
         <Route path="/projects/:projectId" component={Project} />

@@ -10,15 +10,19 @@ import axios from 'axios';
 import { ErrorHandlerService } from '../../../services/error-handler-service';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AuthHelperMethods from "../Register/AutherChecker";
 
-export default class UserProfile extends Component<RouteComponentProps<{}>, state> {
+const Auth = new AuthHelperMethods();
+
+
+export default class UserProfile extends Component<props & RouteComponentProps<props>, state>{
     notifyError = (msg:string) => { toast.error(msg); } 
     
     componentWillMount() {
         document.title = 'Login';
     }
 
-    constructor(props: RouteComponentProps<{}>) {
+    constructor(props: props & RouteComponentProps<props>) {
         super(props)
         this.state = {
           password: '',
@@ -57,12 +61,16 @@ export default class UserProfile extends Component<RouteComponentProps<{}>, stat
         .then((response : any) => {
             if (response.status !== 200){
                 ErrorHandlerService(response);
+                console.log("error")
             }
-            console.log(response.data.msg)
+            console.log("log e response")
+            console.log(response.data)
             if(response.data.msg === 'ok'){
+              console.log("OKKKKKKKKKKKKKKKKKKKKKKKKKKKK")
+              console.log("res was ok");
+              Auth.setToken(response.data.jwt);
               let path = '/home';
               this.props.history.push(path);
-              console.log("res was ok");
             }
             else if(response.data.msg === 'this username does not exist'){
               this.notifyError("کاربر با این نام کاربری وجود ندارد")
@@ -72,6 +80,13 @@ export default class UserProfile extends Component<RouteComponentProps<{}>, stat
             }
         });
     };
+
+    componentDidMount(): void {
+        if (Auth.loggedIn()) {
+            this.props.history.replace("/home");
+        }
+    }
+
 
     render() {
         return (
@@ -102,4 +117,8 @@ export default class UserProfile extends Component<RouteComponentProps<{}>, stat
 interface state{
     username: string;
     password: string;
+}
+
+interface props {
+    
 }
