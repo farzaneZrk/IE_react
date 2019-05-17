@@ -49,8 +49,8 @@ export default class Project extends Component<props & RouteComponentProps<props
       this.setState({ isExpired: myObj.isExpired });
       this.setState({id: myObj.id});
       this.setState({winner: myObj.winner})
-      if(myObj.winner.localeCompare("no one!") === 1){
-        console.log("in if")
+      let no = 'no one! '
+      if(myObj.winner.localeCompare(no) === 0){
         this.setState({winner: 'بدون برنده!'})
       }
       this.parseSkills(myObj.skills);
