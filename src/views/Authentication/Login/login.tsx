@@ -78,7 +78,9 @@ export default class UserProfile extends Component<props & RouteComponentProps<p
             else if(response.data.msg === 'username or password is not correct'){
                 this.notifyError("نام کاربری یا رمز عبور نادرست است")
             }
-        });
+        }).catch(function (error : any) {
+          console.log(error);
+        })
     };
 
     componentDidMount(): void {

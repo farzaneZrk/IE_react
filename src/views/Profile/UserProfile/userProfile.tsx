@@ -150,6 +150,9 @@ export default class UserProfile extends Component<props & RouteComponentProps<p
 
   componentWillMount() {
     document.title = 'My Account';
+    if (!Auth.loggedIn()) {
+      this.props.history.replace("/login");
+    }
   }
 
   componentDidMount = () => {
@@ -162,6 +165,13 @@ export default class UserProfile extends Component<props & RouteComponentProps<p
       this.props.history.replace("/login");
     }
   };
+
+  componentWillUpdate = () => {
+    if (!Auth.loggedIn()) {
+      this.props.history.replace("/login");
+    }
+  }
+
   
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateWindowDimensions);

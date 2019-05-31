@@ -161,25 +161,26 @@ export default class Register extends Component <props & RouteComponentProps<pro
         username: username
       }
     })
-        .then((response : any) => {
-          if (response.status !== 200){
-            ErrorHandlerService(response);
-          }
-          console.log("hello" + response.data.isValid)
-          if(!response.data.isValid){
-            this.confirmedUsername = false;
-            this.setState({usernameBorder: 'red'});
-            this.notifyError("نام کاربری انتخاب شده تکراری است")
-          }
-          else{
-            this.confirmedUsername = true;
-            this.setState({usernameBorder: 'rgba(4, 179, 179, 0.509)'});
-            this.setSubmitButtonClickable();
-          }
-        })
-        .catch(function (error : any) {
-          console.log(error);
-        })
+    .then((response : any) => {
+      if (response.status !== 200){
+        ErrorHandlerService(response);
+      }
+      console.log("bye" + response.data)
+      console.log("hello" + response.data.isValid)
+      if(!response.data.isValid){
+        this.confirmedUsername = false;
+        this.setState({usernameBorder: 'red'});
+        this.notifyError("نام کاربری انتخاب شده تکراری است")
+      }
+      else{
+        this.confirmedUsername = true;
+        this.setState({usernameBorder: 'rgba(4, 179, 179, 0.509)'});
+        this.setSubmitButtonClickable();
+      }
+    })
+    .catch(function (error : any) {
+      console.log(error);
+    })
   }
 
   checkFirstname = (firstname: string) => {
